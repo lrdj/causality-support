@@ -1,0 +1,16 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{# Inject Clarity header into the layout's header region #}
+{% block header %}
+  {% include "partials/service-navigation.html" %}
+{% endblock %}
+
+{# Preserve any per-view beforeContent (e.g. back links) #}
+{% block beforeContent %}
+  {{ super() }}
+{% endblock %}
+
+{# Main content remains unchanged #}
+{% block content %}
+  {{ super() }}
+{% endblock %}

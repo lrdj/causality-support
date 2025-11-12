@@ -1,0 +1,38 @@
+// Minimal overrides for Clarity Lab service navigation within GOV.UK Prototype Kit
+
+#cl-lockup { display: block; height: 2.2rem; }
+.govuk-service-navigation__service-name .govuk-service-navigation__link { display: flex; align-items: center; }
+
+// Base (mobile-first): logo on top, burger on the left underneath
+.govuk-service-navigation__container {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.govuk-service-navigation__service-name { display: flex; align-items: center; flex: 0 0 auto; }
+.govuk-service-navigation__wrapper { margin-left: 0; text-align: left; width: auto; }
+
+@media (min-width: 40.0625em) {
+  // Match vertical padding for brand and nav on desktop for visual centring
+  .govuk-service-navigation__service-name { padding: 20px 0; }
+  .govuk-service-navigation__wrapper { padding: 20px 0; }
+  // Desktop/tablet: logo left, nav right on the same row
+  .govuk-service-navigation__container { flex-direction: row; align-items: center; justify-content: flex-start; }
+  .govuk-service-navigation__wrapper { margin-left: auto; padding-top: 0.5em; text-align: right; }
+  .govuk-service-navigation__list { display: flex !important; margin-bottom: 0; }
+  .govuk-service-navigation__toggle { display: none; }
+  .govuk-service-navigation__item:not(:last-child) { margin-right: 30px; }
+}
+
+// Highlight the 'Free' mark in discovery call link
+#globalDiscoCall mark {
+  background-color: #D19C97;
+  padding: 1px 0.25em;
+}
+
+// Ensure header background matches site (white) and subtle divider
+.govuk-service-navigation { background-color: #ffffff !important; border-bottom: 1px solid #ccc !important; }
+
+/* Ensure no inherited brand background leaks into header */
+.govuk-service-navigation, .govuk-service-navigation * { background-image: none; }
