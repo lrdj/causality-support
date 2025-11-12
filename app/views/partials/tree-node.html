@@ -18,6 +18,9 @@
     {% endif %}
     {# "Why is that" deepens this branch (adds a child to this node) #}
     <a href="/session/{{ session.id }}/node/{{ node.id }}/deepen" class="govuk-link govuk-!-font-size-14">Why is that?</a>
+    {% if node.parent_id %}
+      <a href="/session/{{ session.id }}/node/{{ node.id }}/delete" class="govuk-link govuk-!-font-size-14" onclick="return confirm('Delete this node and its sub-branches?');">Delete node</a>
+    {% endif %}
     {% if session.clusters and session.clusters.length > 0 %}
     <a href="/session/{{ session.id }}/node/{{ node.id }}/cluster" class="govuk-link govuk-!-font-size-14">Assign cluster</a>
     {% endif %}

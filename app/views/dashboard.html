@@ -87,6 +87,9 @@
       <a href="/session/{{ session.id }}/reflection" class="govuk-button govuk-button--secondary" data-module="govuk-button">
         Generate reflection
       </a>
+      <a href="/session/{{ session.id }}/reset-tree" class="govuk-button govuk-button--secondary" data-module="govuk-button" onclick="return confirm('This will clear the entire tree, clusters, and reflection. Continue?');">
+        Reset tree
+      </a>
     </div>
 
     <!-- Phase Management -->

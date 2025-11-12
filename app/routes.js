@@ -356,6 +356,23 @@ router.get('/session/:sessionId/node/:nodeId/respond', (req, res) => {
   res.redirect(`/session/${req.params.sessionId}/add-response?parentId=${req.params.nodeId}`)
 })
 
+// Delete a node and its subtree
+router.get('/session/:sessionId/node/:nodeId/delete', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) {
+    return res.redirect('/sessions')
+  }
+
+  const nodeId = req.params.nodeId
+  // Perform deletion
+  dataHelper.deleteNode(session, nodeId)
+
+  // Clear any temp analysis to avoid referencing deleted nodes
+  delete req.session.data.tempAnalysis
+
+  res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})
+
 // ============================================================================
 // CLUSTERING ROUTES
 // ============================================================================
@@ -450,3 +467,23 @@ router.post('/session/:sessionId/generate-reflection', async (req, res) => {
 })
 
 module.exports = router
+
+// Reset the tree for a session (clears nodes, clusters, prompts, reflection)
+router.get('/session/:sessionId/reset-tree', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) {
+    return res.redirect('/sessions')
+  }
+
+  // Clear causal content
+  session.nodes = []
+  session.clusters = []
+  session.prompt_logs = []
+  session.reflection = null
+  session.root_node_id = null
+  session.phase = 'seeding'
+
+  delete req.session.data.tempAnalysis
+
+  res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})

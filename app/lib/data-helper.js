@@ -251,6 +251,45 @@ function getSessionStats(session) {
   };
 }
 
+/**
+ * Delete a node and its entire subtree from the session
+ * - Removes the node and all descendants from session.nodes
+ * - Updates parent's children array
+ * - Clears root_node_id if the root is deleted
+ */
+function deleteNode(session, nodeId) {
+  if (!session || !session.nodes || session.nodes.length === 0) return;
+
+  // Build a set of nodes to delete (node + descendants)
+  const toDelete = new Set();
+  const collect = (id) => {
+    toDelete.add(id);
+    session.nodes
+      .filter(n => n.parent_id === id)
+      .forEach(child => collect(child.id));
+  };
+  collect(nodeId);
+
+  // Remove reference from parent.children
+  const node = session.nodes.find(n => n.id === nodeId);
+  if (node && node.parent_id) {
+    const parent = session.nodes.find(n => n.id === node.parent_id);
+    if (parent && Array.isArray(parent.children)) {
+      parent.children = parent.children.filter(cid => cid !== nodeId);
+    }
+  }
+
+  // Filter out all nodes to delete
+  session.nodes = session.nodes.filter(n => !toDelete.has(n.id));
+
+  // If we deleted the root, clear root_node_id
+  if (session.root_node_id && toDelete.has(session.root_node_id)) {
+    session.root_node_id = null;
+  }
+
+  return true;
+}
+
 module.exports = {
   generateId,
   createSession,
@@ -268,5 +307,6 @@ module.exports = {
   getNodesInCluster,
   addPromptLog,
   updatePhase,
-  getSessionStats
+  getSessionStats,
+  deleteNode
 };
