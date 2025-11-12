@@ -7,6 +7,8 @@
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "2.0.1",
     "govuk-frontend": "5.13.0",
-    "govuk-prototype-kit": "13.18.1"
+    "govuk-prototype-kit": "13.18.1",
+    "openai": "^6.8.1",
+    "uuid": "^13.0.0"
   }
 }

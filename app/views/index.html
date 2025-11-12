@@ -7,13 +7,70 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
-
     <h1 class="govuk-heading-xl">
-      {{ serviceName }}
+      Causality Garden
     </h1>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
+    <p class="govuk-body-l">
+      A structured-yet-organic method for exploring unclear problems through open-ended causal mapping.
+    </p>
+
+    <p class="govuk-body">
+      This facilitation tool helps you run remote Causality Garden sessions, combining the systemic breadth 
+      of Ishikawa diagrams with the depth of the 5 Whys technique.
+    </p>
+
+    <h2 class="govuk-heading-m">What you can do</h2>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Create and manage workshop sessions</li>
+      <li>Capture participant responses through guided prompts</li>
+      <li>Automatically detect and split multiple ideas</li>
+      <li>Generate follow-up questions to deepen exploration</li>
+      <li>Discover emergent themes and clusters</li>
+      <li>Export insights and reflections</li>
+    </ul>
+
+    {{ govukButton({
+      text: "Start a new session",
+      href: "/session/new",
+      isStartButton: true
+    }) }}
+
+    <p class="govuk-body">
+      <a href="/sessions" class="govuk-link">View existing sessions</a>
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <h2 class="govuk-heading-m">The 5 phases</h2>
+
+    <ol class="govuk-list govuk-list--number">
+      <li><strong>Seeding</strong> (5-10 mins) — Identify the initial feeling or observation</li>
+      <li><strong>Growing roots</strong> (20-30 mins) — Explore first-level causes freely</li>
+      <li><strong>Deepening branches</strong> (20-30 mins) — Follow promising lines of causality</li>
+      <li><strong>Clustering</strong> (30-40 mins) — Move from chaos to meaning</li>
+      <li><strong>Reflection</strong> (10-20 mins) — Surface insights and next questions</li>
+    </ol>
+
+    <p class="govuk-body">
+      <strong>Total time:</strong> 90 minutes (individuals) to 2 hours (groups)
+    </p>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+      <h2 class="govuk-heading-s" id="subsection-title">
+        Typical use cases
+      </h2>
+      <ul class="govuk-list govuk-!-font-size-16">
+        <li>Career or life reflection</li>
+        <li>Service discovery before problem definition</li>
+        <li>Group reflection on shared frustration</li>
+        <li>Sense-making after research or crisis</li>
+      </ul>
+    </aside>
   </div>
 </div>
 

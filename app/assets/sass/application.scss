@@ -4,3 +4,159 @@
 // 
 
 // Add extra styles here
+
+// Custom styles for Causality Garden
+
+// Tree node styling
+.causality-tree {
+  .tree-node {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: #e8e8e8 !important;
+      transform: translateX(2px);
+    }
+  }
+}
+
+// Cluster colour badges
+.cluster-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+// Stats panels
+.stat-panel {
+  background-color: #f3f2f1;
+  padding: 20px;
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  
+  .stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #0b0c0c;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    color: #505a5f;
+  }
+  
+  &.warning {
+    background-color: #fff4e6;
+  }
+}
+
+// Prompt display
+.prompt-display {
+  background: linear-gradient(135deg, #1d70b8 0%, #003078 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 4px;
+  margin: 20px 0;
+  
+  h2 {
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// Response analysis cards
+.analysis-card {
+  border: 2px solid #b1b4b6;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  
+  &.multiple-ideas {
+    border-color: #d4351c;
+    background-color: #fff5f5;
+  }
+  
+  &.single-idea {
+    border-color: #00703c;
+    background-color: #f0f8f5;
+  }
+  
+  &.vague {
+    border-color: #ffdd00;
+    background-color: #fffbf0;
+  }
+}
+
+// Cluster visualization
+.cluster-card {
+  border-left: 4px solid;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .node-count {
+    font-size: 0.875rem;
+    color: #505a5f;
+  }
+}
+
+// Phase indicators
+.phase-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  
+  .phase-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #b1b4b6;
+    
+    &.active {
+      background-color: #1d70b8;
+    }
+  }
+}
+
+// Responsive tree layout
+@media (max-width: 640px) {
+  .causality-tree {
+    margin-left: 0 !important;
+    
+    .tree-node {
+      margin-left: 10px !important;
+    }
+  }
+}
+
+// Print styles for reflection
+@media print {
+  .govuk-header,
+  .govuk-footer,
+  .govuk-back-link,
+  .govuk-button,
+  .govuk-button-group {
+    display: none !important;
+  }
+  
+  .govuk-grid-column-two-thirds {
+    width: 100% !important;
+  }
+}

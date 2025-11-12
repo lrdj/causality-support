@@ -1,0 +1,106 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Reflection – {{ session.title }} – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Session reflection</h1>
+
+    <p class="govuk-body-l">
+      {{ session.title }}
+    </p>
+
+    {% if reflection %}
+      
+      <div class="govuk-panel govuk-panel--confirmation" style="background-color: #f3f2f1;">
+        <div class="govuk-panel__body" style="color: #0b0c0c; font-size: 1.1rem; text-align: left;">
+          {{ reflection }}
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">Session overview</h2>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Total nodes</dt>
+          <dd class="govuk-summary-list__value">{{ stats.total_nodes }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Maximum depth</dt>
+          <dd class="govuk-summary-list__value">{{ stats.max_depth }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Clusters identified</dt>
+          <dd class="govuk-summary-list__value">{{ stats.total_clusters }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Phase</dt>
+          <dd class="govuk-summary-list__value">
+            <strong class="govuk-tag">{{ session.phase | capitalize }}</strong>
+          </dd>
+        </div>
+      </dl>
+
+      {% if session.clusters and session.clusters.length > 0 %}
+        <h2 class="govuk-heading-m">Themes that emerged</h2>
+        
+        <ul class="govuk-list">
+          {% for cluster in session.clusters %}
+          <li>
+            <strong style="color: {{ cluster.colour }};">■</strong>
+            <strong>{{ cluster.label }}</strong> — {{ clusterCounts[cluster.id] || 0 }} nodes
+            {% if cluster.description %}
+            <br><span class="govuk-body-s">{{ cluster.description }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <h2 class="govuk-heading-m">Next steps</h2>
+
+      <p class="govuk-body">Consider:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Which cluster feels most important to address?</li>
+        <li>Are there any shallow branches that need deeper exploration?</li>
+        <li>What patterns or tensions are most striking?</li>
+        <li>What's one small action you could take based on these insights?</li>
+      </ul>
+
+      <div class="govuk-button-group">
+        <a href="/session/{{ session.id }}/dashboard" class="govuk-button">
+          Back to dashboard
+        </a>
+        <button class="govuk-button govuk-button--secondary" onclick="window.print()">
+          Print reflection
+        </button>
+      </div>
+
+    {% else %}
+      
+      <p class="govuk-body">Generating reflection...</p>
+      
+      <form action="/session/{{ session.id }}/generate-reflection" method="post">
+        {{ govukButton({
+          text: "Generate reflection"
+        }) }}
+      </form>
+
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

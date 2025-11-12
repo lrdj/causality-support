@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Add response – {{ session.title }} – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Add participant response</h1>
+
+    {% if parentNode %}
+      <div class="govuk-inset-text">
+        <strong>Responding to:</strong><br>
+        {{ parentNode.text }}
+      </div>
+    {% endif %}
+
+    <form action="/session/{{ session.id }}/process-response" method="post" novalidate>
+      
+      {% if parentNode %}
+        <input type="hidden" name="parentId" value="{{ parentNode.id }}">
+      {% endif %}
+
+      {{ govukTextarea({
+        label: {
+          text: "Participant's response",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "Enter what the participant said. The system will analyze it and suggest if it should be split into multiple nodes."
+        },
+        id: "response",
+        name: "response",
+        rows: 5
+      }) }}
+
+      {{ govukButton({
+        text: "Analyze response"
+      }) }}
+
+    </form>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+      <h2 class="govuk-heading-s">
+        What happens next?
+      </h2>
+      <p class="govuk-body-s">
+        The system will:
+      </p>
+      <ul class="govuk-list govuk-!-font-size-16">
+        <li>Check if the response contains multiple ideas</li>
+        <li>Suggest splitting if needed</li>
+        <li>Detect vague language</li>
+        <li>Recommend follow-up questions</li>
+      </ul>
+    </aside>
+  </div>
+</div>
+
+{% endblock %}

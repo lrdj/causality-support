@@ -1,0 +1,208 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  {{ session.title }} – Dashboard – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to sessions",
+    href: "/sessions"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <span class="govuk-caption-l">Session</span>
+    <h1 class="govuk-heading-l">{{ session.title }}</h1>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <strong class="govuk-tag govuk-tag--blue">{{ session.phase | capitalize }}</strong>
+      </div>
+      <div class="govuk-grid-column-three-quarters">
+        <p class="govuk-body-s" style="margin-bottom: 0;">
+          <strong>Facilitator:</strong> {{ session.facilitator_name }}<br>
+          <strong>Created:</strong> {{ session.created_at }}
+        </p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <!-- Session Stats -->
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-panel govuk-panel--confirmation" style="background-color: #f3f2f1; padding: 15px;">
+          <div class="govuk-panel__body" style="color: #0b0c0c;">
+            <strong style="font-size: 2rem;">{{ stats.total_nodes }}</strong><br>
+            <span style="font-size: 1rem;">Total nodes</span>
+          </div>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-panel govuk-panel--confirmation" style="background-color: #f3f2f1; padding: 15px;">
+          <div class="govuk-panel__body" style="color: #0b0c0c;">
+            <strong style="font-size: 2rem;">{{ stats.max_depth }}</strong><br>
+            <span style="font-size: 1rem;">Max depth</span>
+          </div>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-panel govuk-panel--confirmation" style="background-color: #f3f2f1; padding: 15px;">
+          <div class="govuk-panel__body" style="color: #0b0c0c;">
+            <strong style="font-size: 2rem;">{{ stats.total_clusters }}</strong><br>
+            <span style="font-size: 1rem;">Clusters</span>
+          </div>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-panel govuk-panel--confirmation" style="background-color: #fff4e6; padding: 15px;">
+          <div class="govuk-panel__body" style="color: #0b0c0c;">
+            <strong style="font-size: 2rem;">{{ stats.shallow_nodes }}</strong><br>
+            <span style="font-size: 1rem;">Shallow nodes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <!-- Quick Actions -->
+    <h2 class="govuk-heading-m">Quick actions</h2>
+
+    <div class="govuk-button-group">
+      <a href="/session/{{ session.id }}/participant" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Participant view
+      </a>
+      <a href="/session/{{ session.id }}/add-response" class="govuk-button" data-module="govuk-button">
+        Add response
+      </a>
+      <a href="/session/{{ session.id }}/suggest-clusters" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Suggest clusters
+      </a>
+      <a href="/session/{{ session.id }}/reflection" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Generate reflection
+      </a>
+    </div>
+
+    <!-- Phase Management -->
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+          Change phase
+        </span>
+      </summary>
+      <div class="govuk-details__text">
+        <form action="/session/{{ session.id }}/update-phase" method="post">
+          {{ govukRadios({
+            name: "phase",
+            fieldset: {
+              legend: {
+                text: "Select phase",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "seeding",
+                text: "Seeding",
+                checked: session.phase == "seeding"
+              },
+              {
+                value: "growing",
+                text: "Growing roots",
+                checked: session.phase == "growing"
+              },
+              {
+                value: "deepening",
+                text: "Deepening branches",
+                checked: session.phase == "deepening"
+              },
+              {
+                value: "clustering",
+                text: "Clustering",
+                checked: session.phase == "clustering"
+              },
+              {
+                value: "reflection",
+                text: "Reflection",
+                checked: session.phase == "reflection"
+              }
+            ]
+          }) }}
+          {{ govukButton({
+            text: "Update phase"
+          }) }}
+        </form>
+      </div>
+    </details>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <!-- Causality Tree -->
+    <h2 class="govuk-heading-m">Causality tree</h2>
+
+    {% if tree %}
+      <div class="causality-tree" style="margin-left: 20px;">
+        {% include "partials/tree-node.html" %}
+      </div>
+    {% else %}
+      <p class="govuk-body">No nodes yet. Start by adding the initial seed.</p>
+    {% endif %}
+
+    <!-- Clusters -->
+    {% if session.clusters and session.clusters.length > 0 %}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      <h2 class="govuk-heading-m">Clusters</h2>
+      
+      <div class="govuk-grid-row">
+        {% for cluster in session.clusters %}
+        <div class="govuk-grid-column-one-third">
+          <div class="govuk-panel" style="background-color: {{ cluster.colour }}; padding: 15px; margin-bottom: 20px;">
+            <h3 class="govuk-heading-s" style="margin-bottom: 5px;">{{ cluster.label }}</h3>
+            <p class="govuk-body-s" style="margin-bottom: 0;">
+              {{ cluster.description }}<br>
+              <strong>{{ clusterCounts[cluster.id] or 0 }} nodes</strong>
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Shallow Nodes Warning -->
+    {% if stats.shallow_nodes > 0 %}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      
+      {{ govukWarningText({
+        text: "You have " + stats.shallow_nodes + " shallow node(s) that could be explored deeper.",
+        iconFallbackText: "Warning"
+      }) }}
+      
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            View shallow nodes
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <ul class="govuk-list govuk-list--bullet">
+            {% for node in shallowNodes %}
+            <li>
+              <strong>Level {{ node.level }}:</strong> {{ node.text }}
+              <a href="/session/{{ session.id }}/node/{{ node.id }}/deepen" class="govuk-link">Deepen</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </details>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Create new session – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Create a new session
+    </h1>
+
+    <form action="/session/create" method="post" novalidate>
+
+      {{ govukInput({
+        label: {
+          text: "Session title",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "A brief description of what you'll be exploring"
+        },
+        id: "session-title",
+        name: "sessionTitle",
+        classes: "govuk-!-width-full",
+        value: data['sessionTitle']
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Facilitator name",
+          classes: "govuk-label--m"
+        },
+        id: "facilitator-name",
+        name: "facilitatorName",
+        classes: "govuk-!-width-two-thirds",
+        value: data['facilitatorName']
+      }) }}
+
+      {{ govukTextarea({
+        label: {
+          text: "Initial seed (optional)",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "The starting point: what feels stuck, confusing, or unresolved? You can also add this after creating the session."
+        },
+        id: "initial-seed",
+        name: "initialSeed",
+        rows: 4,
+        value: data['initialSeed']
+      }) }}
+
+      {{ govukButton({
+        text: "Create session"
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

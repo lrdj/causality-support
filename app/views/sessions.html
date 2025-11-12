@@ -1,0 +1,70 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Sessions – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">
+      Your sessions
+    </h1>
+
+    {% if data.sessions and data.sessions.length > 0 %}
+      
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Title</th>
+            <th scope="col" class="govuk-table__header">Phase</th>
+            <th scope="col" class="govuk-table__header">Nodes</th>
+            <th scope="col" class="govuk-table__header">Created</th>
+            <th scope="col" class="govuk-table__header">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for session in data.sessions %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">
+              <a href="/session/{{ session.id }}/dashboard" class="govuk-link">{{ session.title }}</a>
+            </th>
+            <td class="govuk-table__cell">
+              <strong class="govuk-tag">{{ session.phase | capitalize }}</strong>
+            </td>
+            <td class="govuk-table__cell">{{ session.nodes.length if session.nodes else 0 }}</td>
+            <td class="govuk-table__cell">{{ session.created_at }}</td>
+            <td class="govuk-table__cell">
+              <a href="/session/{{ session.id }}/dashboard" class="govuk-link">Open</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+      
+      <p class="govuk-body">You haven't created any sessions yet.</p>
+      
+    {% endif %}
+
+    <p>
+      {{ govukButton({
+        text: "Create new session",
+        href: "/session/new"
+      }) }}
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}

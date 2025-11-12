@@ -1,5 +1,5 @@
 {
-  "serviceName": "Service name goes here",
+  "serviceName": "Causality Garden",
   "plugins": {
     "govuk-frontend": {
       "rebrand": true

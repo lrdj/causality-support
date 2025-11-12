@@ -1,0 +1,118 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Response analysis – {{ session.title }} – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">Response analysis</h1>
+
+    <div class="govuk-inset-text">
+      <strong>Original response:</strong><br>
+      {{ originalResponse }}
+    </div>
+
+    {% if analysis.idea_count > 1 %}
+      
+      {{ govukWarningText({
+        text: "This response contains " + analysis.idea_count + " separate ideas. Consider splitting them into individual nodes.",
+        iconFallbackText: "Warning"
+      }) }}
+
+      <h2 class="govuk-heading-m">Suggested split</h2>
+
+      <form action="/session/{{ session.id }}/create-nodes" method="post">
+        
+        <input type="hidden" name="parentId" value="{{ parentId }}">
+        <input type="hidden" name="originalResponse" value="{{ originalResponse }}">
+        
+        {% for idea in analysis.ideas %}
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="idea-{{ loop.index }}">
+            Idea {{ loop.index }} 
+            <strong class="govuk-tag govuk-tag--grey">{{ idea.type | replace("_", " ") }}</strong>
+          </label>
+          <textarea class="govuk-textarea" id="idea-{{ loop.index }}" name="ideas[]" rows="3">{{ idea.text }}</textarea>
+        </div>
+        {% endfor %}
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Create " + analysis.idea_count + " separate nodes"
+          }) }}
+          
+          <a href="/session/{{ session.id }}/create-single-node?text={{ originalResponse | urlencode }}&parentId={{ parentId }}" class="govuk-button govuk-button--secondary">
+            Keep as single node
+          </a>
+        </div>
+
+      </form>
+
+    {% else %}
+      
+      <h2 class="govuk-heading-m">Analysis</h2>
+      
+      <p class="govuk-body">
+        <strong class="govuk-tag govuk-tag--green">Single idea</strong>
+      </p>
+
+      <p class="govuk-body">
+        Type: <strong>{{ analysis.ideas[0].type | replace("_", " ") }}</strong>
+      </p>
+
+      {% if vaguenessCheck and vaguenessCheck.isVague %}
+        
+        {{ govukWarningText({
+          text: "This response seems vague. Consider asking a follow-up question.",
+          iconFallbackText: "Note"
+        }) }}
+
+        <div class="govuk-inset-text">
+          <strong>Suggested nudge:</strong><br>
+          {{ vaguenessCheck.nudge }}
+        </div>
+
+      {% endif %}
+
+      <form action="/session/{{ session.id }}/create-single-node" method="post">
+        <input type="hidden" name="text" value="{{ originalResponse }}">
+        <input type="hidden" name="parentId" value="{{ parentId }}">
+        
+        {{ govukButton({
+          text: "Create node"
+        }) }}
+      </form>
+
+    {% endif %}
+
+    {% if followUpQuestion %}
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      
+      <h2 class="govuk-heading-m">Suggested follow-up question</h2>
+      
+      <div class="govuk-panel" style="background-color: #1d70b8; padding: 20px;">
+        <p class="govuk-panel__body" style="font-size: 1.25rem;">
+          {{ followUpQuestion }}
+        </p>
+      </div>
+
+      <p class="govuk-body">
+        You can use this question to deepen the exploration after creating the node(s).
+      </p>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
