@@ -185,6 +185,9 @@ router.post('/session/:sessionId/participant/respond', async (req, res) => {
 router.get('/session/:sessionId/add-response', (req, res) => {
   const session = findSession(req.session.data.sessions, req.params.sessionId)
   const parentId = req.query.parentId
+  const prompt = req.query.prompt || null
+  // Mode can be 'deepen' (from /deepen), 'why_else' (sibling add), or default
+  const mode = req.query.mode || (prompt ? 'deepen' : 'add')
   
   if (!session) {
     return res.redirect('/sessions')
@@ -194,7 +197,9 @@ router.get('/session/:sessionId/add-response', (req, res) => {
   
   res.render('add-response', {
     session,
-    parentNode
+    parentNode,
+    prompt,
+    mode
   })
 })
 

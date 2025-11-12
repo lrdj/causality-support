@@ -1,7 +1,13 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Add response – {{ session.title }} – {{ serviceName }}
+  {% if mode == 'deepen' %}
+    Why is that? – {{ session.title }} – {{ serviceName }}
+  {% elseif mode == 'why_else' %}
+    And why else do you think? – {{ session.title }} – {{ serviceName }}
+  {% else %}
+    Add response – {{ session.title }} – {{ serviceName }}
+  {% endif %}
 {% endblock %}
 
 {% block beforeContent %}
@@ -16,13 +22,39 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-l">Add participant response</h1>
+    {% if mode == 'deepen' %}
+      <h1 class="govuk-heading-l">Why is that?</h1>
+    {% elseif mode == 'why_else' %}
+      <h1 class="govuk-heading-l">And why else do you think?</h1>
+    {% else %}
+      <h1 class="govuk-heading-l">Add participant response</h1>
+    {% endif %}
 
     {% if parentNode %}
-      <div class="govuk-inset-text">
-        <strong>Responding to:</strong><br>
-        {{ parentNode.text }}
-      </div>
+      {% if mode == 'deepen' %}
+        {% if prompt %}
+          <div class="govuk-panel govuk-panel--confirmation" style="background-color: #1d70b8;">
+            <h2 class="govuk-panel__title" style="font-size: 1.5rem;">Suggested question</h2>
+            <div class="govuk-panel__body" style="font-size: 1.1rem;">
+              {{ prompt }}
+            </div>
+          </div>
+        {% endif %}
+        <div class="govuk-inset-text">
+          <strong>Fallback phrasing:</strong><br>
+          And why do you think “{{ parentNode.text }}”?
+        </div>
+      {% elseif mode == 'why_else' %}
+        <div class="govuk-inset-text">
+          <strong>Prompt:</strong><br>
+          And why else do you think “{{ parentNode.text }}”?
+        </div>
+      {% else %}
+        <div class="govuk-inset-text">
+          <strong>Responding to:</strong><br>
+          {{ parentNode.text }}
+        </div>
+      {% endif %}
     {% endif %}
 
     <form action="/session/{{ session.id }}/process-response" method="post" novalidate>
