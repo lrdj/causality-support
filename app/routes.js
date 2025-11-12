@@ -356,6 +356,50 @@ router.get('/session/:sessionId/node/:nodeId/respond', (req, res) => {
   res.redirect(`/session/${req.params.sessionId}/add-response?parentId=${req.params.nodeId}`)
 })
 
+// Assign cluster (form)
+router.get('/session/:sessionId/node/:nodeId/cluster', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+
+  const node = dataHelper.getNode(session, req.params.nodeId)
+  if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
+
+  const clusterItems = [
+    { value: 'none', text: 'No cluster', selected: !node.cluster_id }
+  ].concat(
+    (session.clusters || []).map(c => ({
+      value: c.id,
+      text: c.label + (c.description ? ` — ${c.description}` : ''),
+      selected: !!node.cluster_id && node.cluster_id === c.id
+    }))
+  )
+
+  res.render('assign-cluster', {
+    session,
+    node,
+    clusterItems
+  })
+})
+
+// Assign cluster (submit)
+router.post('/session/:sessionId/node/:nodeId/cluster', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+
+  const node = dataHelper.getNode(session, req.params.nodeId)
+  if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
+
+  const { clusterId } = req.body
+  if (!clusterId || clusterId === 'none') {
+    // Clear cluster assignment
+    dataHelper.assignNodeToCluster(session, node.id, null)
+  } else {
+    dataHelper.assignNodeToCluster(session, node.id, clusterId)
+  }
+
+  res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})
+
 // Delete a node and its subtree
 router.get('/session/:sessionId/node/:nodeId/delete', (req, res) => {
   const session = findSession(req.session.data.sessions, req.params.sessionId)
@@ -387,20 +431,46 @@ router.get('/session/:sessionId/suggest-clusters', async (req, res) => {
   
   try {
     const suggestions = await llmHelper.suggestClusters(session.nodes)
-    
+
     if (suggestions.clusters && suggestions.clusters.length > 0) {
-      // Create clusters
+      // Destructive refresh: clear existing clusters and assignments first
+      session.clusters = []
+      if (session.nodes) {
+        session.nodes.forEach(n => { n.cluster_id = null })
+      }
+
+      // Prepare a shuffled colour palette to avoid duplicates while appearing random
+      const palette = [
+        '#F6D365', // Yellow
+        '#FDA085', // Orange
+        '#A8E6CF', // Green
+        '#FFB3BA', // Pink
+        '#BAE1FF', // Blue
+        '#FFFFBA', // Light Yellow
+        '#E0BBE4'  // Purple
+      ]
+      // Fisher–Yates shuffle
+      for (let i = palette.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        const tmp = palette[i]
+        palette[i] = palette[j]
+        palette[j] = tmp
+      }
+      let colourIndex = 0
+
+      // Create clusters from suggestions and assign nodes
       suggestions.clusters.forEach(clusterSuggestion => {
+        const colour = palette[colourIndex % palette.length]
+        colourIndex++
         const cluster = dataHelper.createCluster(
           session.id,
           clusterSuggestion.label,
-          null,
+          colour,
           clusterSuggestion.description || ''
         )
         dataHelper.addClusterToSession(session, cluster)
-        
-        // Assign nodes to cluster
-        if (clusterSuggestion.node_indices) {
+
+        if (Array.isArray(clusterSuggestion.node_indices)) {
           clusterSuggestion.node_indices.forEach(index => {
             if (session.nodes[index]) {
               dataHelper.assignNodeToCluster(session, session.nodes[index].id, cluster.id)

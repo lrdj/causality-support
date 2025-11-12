@@ -1,0 +1,47 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Assign cluster – {{ session.title }} – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Assign cluster</h1>
+
+    <div class="govuk-inset-text">
+      <strong>Node:</strong><br>
+      {{ node.text }}
+    </div>
+
+    <form action="/session/{{ session.id }}/node/{{ node.id }}/cluster" method="post">
+
+      {{ govukSelect({
+        id: "clusterId",
+        name: "clusterId",
+        label: {
+          text: "Select a cluster",
+          classes: "govuk-label--m"
+        },
+        items: clusterItems
+      }) }}
+
+      {{ govukButton({
+        text: "Save"
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

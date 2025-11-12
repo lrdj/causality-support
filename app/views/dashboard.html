@@ -84,7 +84,7 @@
         </a>
       {% endif %}
       <a href="/session/{{ session.id }}/suggest-clusters" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-        Suggest clusters
+        Refresh clusters
       </a>
       <a href="/session/{{ session.id }}/reflection" class="govuk-button govuk-button--secondary" data-module="govuk-button">
         Generate reflection
@@ -163,18 +163,16 @@
     {% if session.clusters and session.clusters.length > 0 %}
       <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
       <h2 class="govuk-heading-m">Clusters</h2>
-      
-      <div class="govuk-grid-row">
+
+      <div class="cluster-grid">
         {% for cluster in session.clusters %}
-        <div class="govuk-grid-column-one-third">
-          <div class="govuk-panel" style="background-color: {{ cluster.colour }}; padding: 15px; margin-bottom: 20px;">
-            <h3 class="govuk-heading-s" style="margin-bottom: 5px;">{{ cluster.label }}</h3>
+          <div class="cluster-tile" style="background-color: {{ cluster.colour }};">
+            <h3 class="govuk-heading-s">{{ cluster.label }}</h3>
             <p class="govuk-body-s" style="margin-bottom: 0;">
               {{ cluster.description }}<br>
-              <strong>{{ clusterCounts[cluster.id] or 0 }} nodes</strong>
+              <strong>{{ clusterCounts[cluster.id] | default(0) }} nodes</strong>
             </p>
           </div>
-        </div>
         {% endfor %}
       </div>
     {% endif %}

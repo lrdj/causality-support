@@ -99,21 +99,36 @@
 }
 
 // Cluster visualization
-.cluster-card {
-  border-left: 4px solid;
-  padding: 15px;
-  margin-bottom: 15px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  grid-auto-rows: auto;
+  clear: both; // avoid interference from any floated elements above
+}
+
+// Coloured cluster tiles (full background colour)
+.cluster-tile {
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  background-clip: padding-box;
+
   h3 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
-  
+
   .node-count {
     font-size: 0.875rem;
-    color: #505a5f;
+  }
+}
+
+// Ensure single column on small screens
+@media (max-width: 640px) {
+  .cluster-grid {
+    grid-template-columns: 1fr;
   }
 }
 

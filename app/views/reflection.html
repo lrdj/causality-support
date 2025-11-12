@@ -60,7 +60,7 @@
           {% for cluster in session.clusters %}
           <li>
             <strong style="color: {{ cluster.colour }};">■</strong>
-            <strong>{{ cluster.label }}</strong> — {{ clusterCounts[cluster.id] || 0 }} nodes
+            <strong>{{ cluster.label }}</strong> — {{ clusterCounts[cluster.id] | default(0) }} nodes
             {% if cluster.description %}
             <br><span class="govuk-body-s">{{ cluster.description }}</span>
             {% endif %}
