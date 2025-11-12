@@ -422,7 +422,8 @@ router.get('/session/:sessionId/node/:nodeId/delete', (req, res) => {
 // ============================================================================
 
 // Suggest clusters using LLM
-router.get('/session/:sessionId/suggest-clusters', async (req, res) => {
+// Refresh clusters (destructive): clears previous clusters and reassigns based on LLM
+router.get('/session/:sessionId/refresh-clusters', async (req, res) => {
   const session = findSession(req.session.data.sessions, req.params.sessionId)
   
   if (!session || !session.nodes || session.nodes.length < 5) {
@@ -485,6 +486,11 @@ router.get('/session/:sessionId/suggest-clusters', async (req, res) => {
     console.error('Error suggesting clusters:', error)
     res.redirect(`/session/${req.params.sessionId}/dashboard`)
   }
+})
+
+// Backwards-compatible redirect from old route name
+router.get('/session/:sessionId/suggest-clusters', (req, res) => {
+  res.redirect(`/session/${req.params.sessionId}/refresh-clusters`)
 })
 
 // ============================================================================

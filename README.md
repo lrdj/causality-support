@@ -5,6 +5,37 @@ Causality Garden
 ================
 
 
+## About This Tool
+
+This repository contains a GOV.UK Prototype Kit web app for facilitating a “Causality Garden” workshop — a structured-yet-organic method to explore unclear problems via open-ended causal mapping.
+
+Key capabilities:
+
+- Build a causal tree from a seed (“starting point”).
+- Add two kinds of responses on each node:
+  - “Why is that?” — deepens the branch (adds a child).
+  - “And why else do you think?” — adds a sibling (adds another child to the same parent).
+- AI assistance for splitting multi‑idea responses, generating follow-up questions, suggesting clusters (themes), and producing a short reflection.
+- Manual cluster assignment per node; clusters display as colored tiles.
+- Safe editing: delete a node (and its subtree), or reset the whole tree.
+
+Quick start:
+
+1. `npm install`
+2. `export OPENAI_API_KEY=your_key_here`
+3. `npm run dev` and open http://localhost:3000
+4. Create a session → “Add starting point” → build the tree with “Why is that?” and “And why else do you think?”
+5. “Refresh clusters” to re-calculate themes; optionally “Assign cluster” manually.
+6. “Generate reflection” to produce a short summary.
+
+Notes:
+
+- Data is in-memory; restart or “Reset tree” clears the session content.
+- Participant view is experimental (single-prompt flow; refresh to see new questions).
+
+For a detailed technical overview, see IMPLEMENTATION.md. For installation specifics, see INSTALL.md. Recent changes are in CHANGELOG.md.
+
+
 ## **Part 1 – Facilitator Training Manual**
 
 *(for learning and confidently leading a Causality Garden session)*
@@ -142,5 +173,4 @@ To help participants externalise complexity, explore causal threads, and discove
 * Open-ended *causality map* (tree or web form)
 * Themed clusters (e.g. 4–8) with participant-chosen names
 * Summary of insights, tensions, or next actions
-
 

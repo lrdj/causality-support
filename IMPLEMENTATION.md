@@ -4,6 +4,20 @@
 
 A complete GOV.UK Prototype Kit-based facilitation tool for running remote Causality Garden workshops with AI-powered assistance.
 
+### Recent Changes
+
+- Explicit node actions: “Why is that?” (adds a child) and “And why else do you think?” (adds a sibling via the parent).
+- Seeding: Dashboard shows “Add starting point” only when no root exists; prevents accidental multiple roots.
+- Deletion/reset: Non-root “Delete node” removes a node and its entire subtree. “Reset tree” clears nodes, clusters, prompts, and reflection and returns to the seeding phase.
+- Clustering: “Suggest clusters” is now a destructive “Refresh clusters” that replaces previous clusters and assignments with a fresh pass based on all nodes. Cluster colors are unique per refresh using a shuffled palette. Manual “Assign cluster” form lets you set or clear a node’s cluster.
+- Reflection: Template fix for default operator; reflection renders reliably.
+- UI: Cluster tiles in a responsive grid (single column on small screens). Add-response page shows mode-aware headings and, for deepening, both LLM follow-up and a fallback phrasing.
+
+### Current Status
+
+- Participant view works for single-prompt flows (facilitator sets a prompt by deepening a node) but is considered experimental; refresh required to see new prompts.
+- Data is in-memory (no database). Restarting the server or using “Reset tree” clears session data.
+
 ## What Was Built
 
 ### 1. Core Infrastructure
@@ -75,7 +89,7 @@ A complete GOV.UK Prototype Kit-based facilitation tool for running remote Causa
 - `GET /session/:id/node/:nodeId/respond` - Add response to node
 
 **Clustering**
-- `GET /session/:id/suggest-clusters` - AI-powered clustering
+- `GET /session/:id/refresh-clusters` - AI-powered clustering (destructive refresh)
 
 **Reflection**
 - `GET /session/:id/reflection` - View reflection
@@ -336,9 +350,8 @@ The tool uses the OpenAI API (pre-configured in environment) with these function
    - Nunjucks date filter not available in prototype kit
    - Can add custom filter if needed
 
-3. **Cluster Assignment**: Manual assignment UI not yet built
-   - Auto-suggestion works
-   - Manual reassignment requires code
+3. **Cluster Assignment**: Manual per-node assignment UI is available
+  - “Refresh clusters” replaces all clusters and clears manual assignments
 
 4. **Export**: No export to PDF/JSON yet
    - Can print reflection page
