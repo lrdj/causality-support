@@ -118,6 +118,10 @@ function addNodeToSession(session, node) {
     }
   } else {
     node.level = 0;
+    // Ensure root is recorded if not set
+    if (!session.root_node_id) {
+      session.root_node_id = node.id;
+    }
   }
   
   session.nodes.push(node);

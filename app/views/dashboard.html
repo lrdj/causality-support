@@ -78,9 +78,11 @@
       <a href="/session/{{ session.id }}/participant" class="govuk-button govuk-button--secondary" data-module="govuk-button">
         Participant view
       </a>
-      <a href="/session/{{ session.id }}/add-response" class="govuk-button" data-module="govuk-button">
-        Add response
-      </a>
+      {% if not tree %}
+        <a href="/session/{{ session.id }}/add-response?mode=seed" class="govuk-button" data-module="govuk-button">
+          Add starting point
+        </a>
+      {% endif %}
       <a href="/session/{{ session.id }}/suggest-clusters" class="govuk-button govuk-button--secondary" data-module="govuk-button">
         Suggest clusters
       </a>
