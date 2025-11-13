@@ -1,0 +1,47 @@
+digraph CausalityGarden {
+  graph [label="Causality garden: career", labelloc=t, fontsize=20];
+  node [shape=box, style=rounded];
+
+  n0  [label="I feel stuck in my job"];
+
+  n1  [label="I don’t feel I’m learning anymore"];
+  n1a [label="The projects are repetitive"];
+  n1b [label="My manager assigns me only to safe work"];
+  n1c [label="I once failed on a complex task → lack of trust"];
+
+  n2  [label="I don’t see future opportunities"];
+  n2a [label="The company is shrinking"];
+  n2b [label="The industry is changing"];
+  n2c [label="AI is automating my role"];
+
+  n3  [label="I feel disconnected from my colleagues"];
+  n3a [label="Remote work reduced informal chat"];
+  n3b [label="I moved cities after lockdown"];
+  n3c [label="Partner’s career relocation"];
+
+  n4  [label="I can’t leave easily"];
+  n4a [label="Financial commitments"];
+  n4b [label="Fear of losing identity as a “successful professional”"];
+  n4c [label="Family expectations"];
+
+  // Edges
+  n0 -> n1;
+  n1 -> n1a;
+  n1a -> n1b;
+  n1b -> n1c;
+
+  n0 -> n2;
+  n2 -> n2a;
+  n2 -> n2b;
+  n2b -> n2c;
+
+  n0 -> n3;
+  n3 -> n3a;
+  n3 -> n3b;
+  n3b -> n3c;
+
+  n0 -> n4;
+  n4 -> n4a;
+  n4 -> n4b;
+  n4 -> n4c;
+}

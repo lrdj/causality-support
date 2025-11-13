@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="node" attr.name="label" attr.type="string"/>
+  <graph id="causality_garden" edgedefault="directed">
+
+    <node id="n0"><data key="d0">I feel stuck in my job</data></node>
+
+    <node id="n1"><data key="d0">I don’t feel I’m learning anymore</data></node>
+    <node id="n1a"><data key="d0">The projects are repetitive</data></node>
+    <node id="n1b"><data key="d0">My manager assigns me only to safe work</data></node>
+    <node id="n1c"><data key="d0">I once failed on a complex task → lack of trust</data></node>
+
+    <node id="n2"><data key="d0">I don’t see future opportunities</data></node>
+    <node id="n2a"><data key="d0">The company is shrinking</data></node>
+    <node id="n2b"><data key="d0">The industry is changing</data></node>
+    <node id="n2c"><data key="d0">AI is automating my role</data></node>
+
+    <node id="n3"><data key="d0">I feel disconnected from my colleagues</data></node>
+    <node id="n3a"><data key="d0">Remote work reduced informal chat</data></node>
+    <node id="n3b"><data key="d0">I moved cities after lockdown</data></node>
+    <node id="n3c"><data key="d0">Partner’s career relocation</data></node>
+
+    <node id="n4"><data key="d0">I can’t leave easily</data></node>
+    <node id="n4a"><data key="d0">Financial commitments</data></node>
+    <node id="n4b"><data key="d0">Fear of losing identity as a &quot;successful professional&quot;</data></node>
+    <node id="n4c"><data key="d0">Family expectations</data></node>
+
+    <edge id="e0"  source="n0"  target="n1"/>
+    <edge id="e1"  source="n1"  target="n1a"/>
+    <edge id="e2"  source="n1a" target="n1b"/>
+    <edge id="e3"  source="n1b" target="n1c"/>
+
+    <edge id="e4"  source="n0"  target="n2"/>
+    <edge id="e5"  source="n2"  target="n2a"/>
+    <edge id="e6"  source="n2"  target="n2b"/>
+    <edge id="e7"  source="n2b" target="n2c"/>
+
+    <edge id="e8"  source="n0"  target="n3"/>
+    <edge id="e9"  source="n3"  target="n3a"/>
+    <edge id="e10" source="n3"  target="n3b"/>
+    <edge id="e11" source="n3b" target="n3c"/>
+
+    <edge id="e12" source="n0"  target="n4"/>
+    <edge id="e13" source="n4"  target="n4a"/>
+    <edge id="e14" source="n4"  target="n4b"/>
+    <edge id="e15" source="n4"  target="n4c"/>
+
+  </graph>
+</graphml>
