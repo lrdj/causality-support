@@ -1,0 +1,114 @@
+{% extends "layouts/clarity.html" %}
+
+{% block pageTitle %}
+  {% if mode == 'deepen' %}
+    Why is that? – {{ session.title }} – {{ serviceName }}
+  {% elseif mode == 'why_else' %}
+    And why else do you think? – {{ session.title }} – {{ serviceName }}
+  {% elseif mode == 'seed' %}
+    What's the main problem? – {{ session.title }} – {{ serviceName }}
+  {% else %}
+    Add response – {{ session.title }} – {{ serviceName }}
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+  {% if mode == 'deepen' %}
+    <h1 class="govuk-heading-l">Why is that?</h1>
+  {% elseif mode == 'why_else' %}
+    <h1 class="govuk-heading-l">And why else do you think?</h1>
+  {% elseif mode == 'seed' %}
+    <h1 class="govuk-heading-l">What's the main problem?</h1>
+  {% else %}
+    <h1 class="govuk-heading-l">Add participant response</h1>
+  {% endif %}
+
+    {% if parentNode %}
+      {% if mode == 'deepen' %}
+        {% if prompt %}
+          <div class="govuk-panel govuk-panel--confirmation" style="background-color: #1d70b8;">
+            <h2 class="govuk-panel__title" style="font-size: 1.5rem;">Suggested question</h2>
+            <div class="govuk-panel__body" style="font-size: 1.1rem;">
+              {{ prompt }}
+            </div>
+          </div>
+        {% endif %}
+        <div class="govuk-inset-text">
+          <strong>Fallback phrasing:</strong><br>
+          And why do you think “{{ parentNode.text }}”?
+        </div>
+      {% elseif mode == 'why_else' %}
+        <div class="govuk-inset-text">
+          <strong>Prompt:</strong><br>
+          And why else do you think “{{ parentNode.text }}”?
+        </div>
+      {% else %}
+        <div class="govuk-inset-text">
+          <strong>Responding to:</strong><br>
+          {{ parentNode.text }}
+        </div>
+      {% endif %}
+    {% elseif mode == 'seed' %}
+      <div class="govuk-inset-text">
+        <strong>Prompt:</strong><br>
+        What feels stuck, frustrating, or unclear right now?
+      </div>
+    {% endif %}
+
+    <form action="/session/{{ session.id }}/process-response" method="post" novalidate>
+      
+      {% if parentNode %}
+        <input type="hidden" name="parentId" value="{{ parentNode.id }}">
+      {% endif %}
+
+      {{ govukTextarea({
+        label: {
+          text: "Participant's response",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "Enter what the participant said. The system will analyse it and suggest if it should be split into multiple nodes."
+        },
+        id: "response",
+        name: "response",
+        rows: 5
+      }) }}
+
+      {{ govukButton({
+        text: "Analyse response"
+      }) }}
+
+    </form>
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+      <h2 class="govuk-heading-s">
+        What happens next?
+      </h2>
+      <p class="govuk-body-s">
+        The system will:
+      </p>
+      <ul class="govuk-list govuk-!-font-size-16">
+        <li>Check if the response contains multiple ideas</li>
+        <li>Suggest splitting if needed</li>
+        <li>Detect vague language</li>
+        <li>Recommend follow-up questions</li>
+      </ul>
+    </aside>
+  </div>
+</div>
+
+{% endblock %}

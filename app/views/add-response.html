@@ -6,7 +6,7 @@
   {% elseif mode == 'why_else' %}
     And why else do you think? – {{ session.title }} – {{ serviceName }}
   {% elseif mode == 'seed' %}
-    Add starting point – {{ session.title }} – {{ serviceName }}
+    What's the main problem? – {{ session.title }} – {{ serviceName }}
   {% else %}
     Add response – {{ session.title }} – {{ serviceName }}
   {% endif %}
@@ -24,61 +24,47 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-  {% if mode == 'deepen' %}
-    <h1 class="govuk-heading-l">Why is that?</h1>
-  {% elseif mode == 'why_else' %}
-    <h1 class="govuk-heading-l">And why else do you think?</h1>
-  {% elseif mode == 'seed' %}
-    <h1 class="govuk-heading-l">Add starting point</h1>
-  {% else %}
-    <h1 class="govuk-heading-l">Add participant response</h1>
-  {% endif %}
-
-    {% if parentNode %}
-      {% if mode == 'deepen' %}
-        {% if prompt %}
-          <div class="govuk-panel govuk-panel--confirmation" style="background-color: #1d70b8;">
-            <h2 class="govuk-panel__title" style="font-size: 1.5rem;">Suggested question</h2>
-            <div class="govuk-panel__body" style="font-size: 1.1rem;">
-              {{ prompt }}
-            </div>
-          </div>
-        {% endif %}
-        <div class="govuk-inset-text">
-          <strong>Fallback phrasing:</strong><br>
-          And why do you think “{{ parentNode.text }}”?
-        </div>
-      {% elseif mode == 'why_else' %}
-        <div class="govuk-inset-text">
-          <strong>Prompt:</strong><br>
-          And why else do you think “{{ parentNode.text }}”?
-        </div>
-      {% else %}
-        <div class="govuk-inset-text">
-          <strong>Responding to:</strong><br>
-          {{ parentNode.text }}
-        </div>
-      {% endif %}
-    {% elseif mode == 'seed' %}
-      <div class="govuk-inset-text">
-        <strong>Prompt:</strong><br>
-        What feels stuck, frustrating, or unclear right now?
-      </div>
-    {% endif %}
-
     <form action="/session/{{ session.id }}/process-response" method="post" novalidate>
       
       {% if parentNode %}
         <input type="hidden" name="parentId" value="{{ parentNode.id }}">
       {% endif %}
 
+      {# Compute a label that mirrors the H1 based on mode #}
+      {% set labelText = "Participant's response" %}
+      {% if mode == 'deepen' %}
+        {% set labelText = "Why is that?" %}
+      {% elseif mode == 'why_else' %}
+        {% set labelText = "And why else do you think?" %}
+      {% elseif mode == 'seed' %}
+        {% set labelText = "What's the main problem?" %}
+      {% endif %}
+
+      {# Compute a hint that reminds the participant of the context #}
+      {% set hintText = "Enter what the participant said. The system will analyse it and suggest if it should be split into multiple nodes." %}
+      {% if mode == 'deepen' %}
+        {% if parentNode %}
+          {% set hintText = "Why do you think “" ~ parentNode.text ~ "”" %}
+        {% else %}
+          {% set hintText = "Why do you think that?" %}
+        {% endif %}
+      {% elseif mode == 'why_else' %}
+        {% if parentNode %}
+          {% set hintText = "Why else do you think “" ~ parentNode.text ~ "”" %}
+        {% else %}
+          {% set hintText = "Why else do you think that?" %}
+        {% endif %}
+      {% elseif mode == 'seed' %}
+        {% set hintText = "In one sentence: what feels stuck, frustrating, or unclear right now?" %}
+      {% endif %}
+
       {{ govukTextarea({
         label: {
-          text: "Participant's response",
-          classes: "govuk-label--m"
+          text: labelText,
+          classes: "govuk-label--l"
         },
         hint: {
-          text: "Enter what the participant said. The system will analyze it and suggest if it should be split into multiple nodes."
+          text: hintText
         },
         id: "response",
         name: "response",
@@ -86,7 +72,7 @@
       }) }}
 
       {{ govukButton({
-        text: "Analyze response"
+        text: "Analyse response"
       }) }}
 
     </form>
