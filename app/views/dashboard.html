@@ -19,6 +19,8 @@
     <span class="govuk-caption-l">Session</span>
     <h1 class="govuk-heading-l">{{ session.title }}</h1>
 
+    {# Rename flow is handled from the sessions table; no inline form here #}
+
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-quarter">
         <strong class="govuk-tag govuk-tag--blue">{{ session.phase | capitalize }}</strong>
@@ -26,7 +28,7 @@
       <div class="govuk-grid-column-three-quarters">
         <p class="govuk-body-s" style="margin-bottom: 0;">
           <strong>Facilitator:</strong> {{ session.facilitator_name }}<br>
-          <strong>Created:</strong> {{ session.created_at }}
+          <strong>Created:</strong> {{ session.created_at | formatDate('yy-MM-dd HH:mm') }}
         </p>
       </div>
     </div>

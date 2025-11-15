@@ -105,7 +105,8 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
     tree,
     stats,
     shallowNodes,
-    clusterCounts
+    clusterCounts,
+    renamed: req.query.renamed || null
   })
 })
 
@@ -544,6 +545,26 @@ router.post('/session/:sessionId/generate-reflection', async (req, res) => {
 
 module.exports = router
 
+// ============================================================================
+// TITLE UPDATE ROUTE
+// ============================================================================
+
+// Update session title
+router.post('/session/:sessionId/update-title', (req, res) => {
+  const sessions = req.session.data.sessions || []
+  const session = findSession(sessions, req.params.sessionId)
+  if (!session) {
+    return res.redirect('/sessions')
+  }
+
+  const title = (req.body.title || '').trim()
+  if (title.length > 0) {
+    session.title = title.slice(0, 120)
+  }
+
+  return res.redirect(`/session/${req.params.sessionId}/dashboard?renamed=1#rename-form`)
+})
+
 // Reset the tree for a session (clears nodes, clusters, prompts, reflection)
 router.get('/session/:sessionId/reset-tree', (req, res) => {
   const session = findSession(req.session.data.sessions, req.params.sessionId)
@@ -562,4 +583,126 @@ router.get('/session/:sessionId/reset-tree', (req, res) => {
   delete req.session.data.tempAnalysis
 
   res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})
+
+// ============================================================================
+// EXPORT / IMPORT ROUTES
+// ============================================================================
+
+// Export a session as JSON download
+router.get('/session/:sessionId/export', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) {
+    return res.redirect('/sessions')
+  }
+
+  const safeTitle = (session.title || 'session').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+  const filename = `${safeTitle || 'session'}-${session.id}.json`
+
+  res.setHeader('Content-Type', 'application/json; charset=utf-8')
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`)
+  res.send(JSON.stringify(session, null, 2))
+})
+
+// Import session (form)
+router.get('/session/import', (req, res) => {
+  res.render('session-import', {
+    error: req.query.error || null
+  })
+})
+
+// Import session (submit)
+router.post('/session/import', (req, res) => {
+  const { sessionJson } = req.body || {}
+  if (!sessionJson || !sessionJson.trim()) {
+    return res.redirect('/session/import?error=' + encodeURIComponent('Paste a session JSON to import.'))
+  }
+
+  try {
+    const parsed = JSON.parse(sessionJson)
+    const sessions = req.session.data.sessions || []
+
+    // Basic normalization
+    const session = {
+      id: parsed.id || dataHelper.generateId('session'),
+      title: parsed.title || 'Imported session',
+      facilitator_name: parsed.facilitator_name || 'Facilitator',
+      phase: parsed.phase || 'seeding',
+      created_at: parsed.created_at || new Date().toISOString(),
+      root_node_id: parsed.root_node_id || null,
+      nodes: parsed.nodes || [],
+      clusters: parsed.clusters || [],
+      prompt_logs: parsed.prompt_logs || [],
+      reflection: parsed.reflection || null
+    }
+
+    // If ID collides, generate a new one and note import
+    if (sessions.find(s => s.id === session.id)) {
+      session.id = dataHelper.generateId('session')
+      session.title = (session.title || 'Imported session') + ' (imported)'
+    }
+
+    sessions.push(session)
+    req.session.data.sessions = sessions
+    return res.redirect('/sessions')
+  } catch (e) {
+    return res.redirect('/session/import?error=' + encodeURIComponent('Invalid JSON. Please check and try again.'))
+  }
+})
+
+// Create a sample session from bundled JSON
+router.get('/session/create-sample', (req, res) => {
+  const fs = require('fs')
+  const path = require('path')
+  const samplePath = path.join(process.cwd(), 'app', 'sample-sessions', 'career.json')
+  try {
+    const raw = fs.readFileSync(samplePath, 'utf8')
+    const parsed = JSON.parse(raw)
+    const sessions = req.session.data.sessions || []
+
+    const session = {
+      id: dataHelper.generateId('session'),
+      title: parsed.title || 'Sample session',
+      facilitator_name: parsed.facilitator_name || 'Facilitator',
+      phase: parsed.phase || 'growing',
+      created_at: new Date().toISOString(),
+      root_node_id: null,
+      nodes: [],
+      clusters: parsed.clusters || [],
+      prompt_logs: [],
+      reflection: null
+    }
+
+    // Re-id nodes to avoid collisions and wire parent/levels
+    const idMap = {}
+    parsed.nodes.forEach(n => { idMap[n.id] = dataHelper.generateId('node') })
+    const now = Date.now()
+    // First pass create nodes
+    parsed.nodes.forEach(n => {
+      const parentId = n.parent_id ? idMap[n.parent_id] : null
+      const node = {
+        id: idMap[n.id],
+        session_id: session.id,
+        parent_id: parentId,
+        text: n.text,
+        level: 0,
+        author_id: n.author_id || 'participant',
+        created_at: new Date(now).toISOString(),
+        tags: [],
+        cluster_id: null
+      }
+      dataHelper.addNodeToSession(session, node)
+    })
+
+    // Set root if present
+    const root = dataHelper.getRootNode(session)
+    if (root) session.root_node_id = root.id
+
+    sessions.push(session)
+    req.session.data.sessions = sessions
+    res.redirect(`/session/${session.id}/dashboard`)
+  } catch (e) {
+    console.error('Error creating sample session', e)
+    res.redirect('/sessions')
+  }
 })

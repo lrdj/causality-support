@@ -1,0 +1,49 @@
+{% extends "layouts/clarity.html" %}
+
+{% block pageTitle %}
+  Import session – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to sessions",
+    href: "/sessions"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Import session</h1>
+
+    {% if error %}
+      {{ govukWarningText({
+        text: error,
+        iconFallbackText: "Warning"
+      }) }}
+    {% endif %}
+
+    <form action="/session/import" method="post" novalidate>
+      {{ govukTextarea({
+        label: {
+          text: "Paste session JSON",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "Paste the contents of a previously exported session JSON file."
+        },
+        id: "sessionJson",
+        name: "sessionJson",
+        rows: 12
+      }) }}
+
+      {{ govukButton({ text: "Import" }) }}
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+

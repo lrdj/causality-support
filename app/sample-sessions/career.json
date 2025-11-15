@@ -1,0 +1,35 @@
+{
+  "id": "session_sample_career",
+  "title": "Sample: Career reflection",
+  "facilitator_name": "Ian Kilby",
+  "phase": "growing",
+  "created_at": "2025-01-01T10:00:00.000Z",
+  "root_node_id": "n0",
+  "nodes": [
+    {"id":"n0","session_id":"session_sample_career","parent_id":null,"text":"I feel stuck in my job","level":0,"author_id":"participant","created_at":"2025-01-01T10:01:00.000Z","tags":[],"cluster_id":null},
+
+    {"id":"n1","session_id":"session_sample_career","parent_id":"n0","text":"I don’t feel I’m learning anymore","level":1,"author_id":"participant","created_at":"2025-01-01T10:01:10.000Z","tags":[],"cluster_id":null},
+    {"id":"n1a","session_id":"session_sample_career","parent_id":"n1","text":"The projects are repetitive","level":2,"author_id":"participant","created_at":"2025-01-01T10:01:20.000Z","tags":[],"cluster_id":null},
+    {"id":"n1b","session_id":"session_sample_career","parent_id":"n1a","text":"My manager assigns me only to safe work","level":3,"author_id":"participant","created_at":"2025-01-01T10:01:30.000Z","tags":[],"cluster_id":null},
+    {"id":"n1c","session_id":"session_sample_career","parent_id":"n1b","text":"I once failed on a complex task → lack of trust","level":4,"author_id":"participant","created_at":"2025-01-01T10:01:40.000Z","tags":[],"cluster_id":null},
+
+    {"id":"n2","session_id":"session_sample_career","parent_id":"n0","text":"I don’t see future opportunities","level":1,"author_id":"participant","created_at":"2025-01-01T10:01:50.000Z","tags":[],"cluster_id":null},
+    {"id":"n2a","session_id":"session_sample_career","parent_id":"n2","text":"The company is shrinking","level":2,"author_id":"participant","created_at":"2025-01-01T10:02:00.000Z","tags":[],"cluster_id":null},
+    {"id":"n2b","session_id":"session_sample_career","parent_id":"n2","text":"The industry is changing","level":2,"author_id":"participant","created_at":"2025-01-01T10:02:10.000Z","tags":[],"cluster_id":null},
+    {"id":"n2c","session_id":"session_sample_career","parent_id":"n2b","text":"AI is automating my role","level":3,"author_id":"participant","created_at":"2025-01-01T10:02:20.000Z","tags":[],"cluster_id":null},
+
+    {"id":"n3","session_id":"session_sample_career","parent_id":"n0","text":"I feel disconnected from my colleagues","level":1,"author_id":"participant","created_at":"2025-01-01T10:02:30.000Z","tags":[],"cluster_id":null},
+    {"id":"n3a","session_id":"session_sample_career","parent_id":"n3","text":"Remote work reduced informal chat","level":2,"author_id":"participant","created_at":"2025-01-01T10:02:40.000Z","tags":[],"cluster_id":null},
+    {"id":"n3b","session_id":"session_sample_career","parent_id":"n3","text":"I moved cities after lockdown","level":2,"author_id":"participant","created_at":"2025-01-01T10:02:50.000Z","tags":[],"cluster_id":null},
+    {"id":"n3c","session_id":"session_sample_career","parent_id":"n3b","text":"Partner’s career relocation","level":3,"author_id":"participant","created_at":"2025-01-01T10:03:00.000Z","tags":[],"cluster_id":null},
+
+    {"id":"n4","session_id":"session_sample_career","parent_id":"n0","text":"I can’t leave easily","level":1,"author_id":"participant","created_at":"2025-01-01T10:03:10.000Z","tags":[],"cluster_id":null},
+    {"id":"n4a","session_id":"session_sample_career","parent_id":"n4","text":"Financial commitments","level":2,"author_id":"participant","created_at":"2025-01-01T10:03:20.000Z","tags":[],"cluster_id":null},
+    {"id":"n4b","session_id":"session_sample_career","parent_id":"n4","text":"Fear of losing identity as a “successful professional”","level":2,"author_id":"participant","created_at":"2025-01-01T10:03:30.000Z","tags":[],"cluster_id":null},
+    {"id":"n4c","session_id":"session_sample_career","parent_id":"n4","text":"Family expectations","level":2,"author_id":"participant","created_at":"2025-01-01T10:03:40.000Z","tags":[],"cluster_id":null}
+  ],
+  "clusters": [],
+  "prompt_logs": [],
+  "reflection": null
+}
+

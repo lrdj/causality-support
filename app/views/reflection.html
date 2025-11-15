@@ -26,7 +26,16 @@
       
       <div class="govuk-panel govuk-panel--confirmation" style="background-color: #f3f2f1;">
         <div class="govuk-panel__body" style="color: #0b0c0c; font-size: 1.1rem; text-align: left;">
-          {{ reflection }}
+          {% set sentences = reflection | splitSentences %}
+          {% if sentences and sentences.length > 1 %}
+            <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-0">
+              {% for s in sentences %}
+                <li>{{ s }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="govuk-body">{{ reflection }}</p>
+          {% endif %}
         </div>
       </div>
 
@@ -64,6 +73,22 @@
             {% if cluster.description %}
             <br><span class="govuk-body-s">{{ cluster.description }}</span>
             {% endif %}
+
+            {# Details pattern: list all node texts in this cluster #}
+            {% set nodeList %}
+              <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+                {% for node in session.nodes %}
+                  {% if node.cluster_id and node.cluster_id == cluster.id %}
+                    <li>{{ node.text }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endset %}
+
+            {{ govukDetails({
+              summaryText: "List challenges (" + (clusterCounts[cluster.id] | default(0)) + ")",
+              html: nodeList
+            }) }}
           </li>
           {% endfor %}
         </ul>
