@@ -49,7 +49,8 @@ router.use((req, res, next) => {
 // View all sessions
 router.get('/sessions', (req, res) => {
   res.render('sessions', {
-    sessions: req.session.data.sessions || []
+    sessions: req.session.data.sessions || [],
+    renamed: req.query.renamed || null
   })
 })
 
@@ -562,7 +563,14 @@ router.post('/session/:sessionId/update-title', (req, res) => {
     session.title = title.slice(0, 120)
   }
 
-  return res.redirect(`/session/${req.params.sessionId}/dashboard?renamed=1#rename-form`)
+  return res.redirect(`/sessions?renamed=1`)
+})
+
+// Edit title form
+router.get('/session/:sessionId/edit-title', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+  res.render('session-rename', { session })
 })
 
 // Reset the tree for a session (clears nodes, clusters, prompts, reflection)

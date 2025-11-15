@@ -1,0 +1,40 @@
+{% extends "layouts/clarity.html" %}
+
+{% block pageTitle %}
+  Rename session – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to sessions",
+    href: "/sessions"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Rename session</h1>
+
+    <form action="/session/{{ session.id }}/update-title" method="post">
+      {{ govukInput({
+        id: 'title',
+        name: 'title',
+        label: { text: 'New title', classes: 'govuk-label--m' },
+        classes: 'govuk-!-width-full',
+        value: session.title
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({ text: 'Save title' }) }}
+        <a href="/sessions" class="govuk-link">Cancel</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+

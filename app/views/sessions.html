@@ -20,6 +20,13 @@
       Your sessions
     </h1>
 
+    {% if renamed %}
+      {{ govukNotificationBanner({
+        type: 'success',
+        text: 'Session title updated'
+      }) }}
+    {% endif %}
+
     {% if data.sessions and data.sessions.length > 0 %}
       
       <table class="govuk-table">
@@ -46,7 +53,7 @@
             <td class="govuk-table__cell">
               <a href="/session/{{ session.id }}/export" class="govuk-link">Export</a>
               &nbsp;|&nbsp;
-              <a href="/session/{{ session.id }}/dashboard#rename-form" class="govuk-link">Rename</a>
+              <a href="/session/{{ session.id }}/edit-title" class="govuk-link">Rename</a>
             </td>
           </tr>
           {% endfor %}
