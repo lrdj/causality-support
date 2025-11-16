@@ -37,22 +37,22 @@ function getClusterLabel(session, clusterId) {
 
 // Agency helpers
 function getAgencyLabel(agency) {
-  const map = { none: 'No agency', low: 'Low agency', med: 'Some agency', high: 'High agency' }
+  const map = { unset: 'Agency not set', low: 'Low agency', med: 'Some agency', high: 'High agency' }
   return map[agency] || null
 }
 function getAgencyBackground(agency) {
   switch (agency) {
-    case 'none': return '#f3d2d2' // light red tint
-    case 'low': return '#fff4e5' // light amber tint
-    case 'med': return '#fff1b8' // deeper amber tint
+    case 'low': return '#f3d2d2' // light red tint
+    case 'med': return '#fff4e5' // light amber tint
     case 'high': return '#e0f3e8' // light green tint
+    case 'unset':
     default: return '#f3f2f1'
   }
 }
 function getAgencyColour(agency) {
   switch (agency) {
-    case 'none': return '#d4351c' // govuk red
-    case 'low': return '#ffdd00' // govuk yellow
+    case 'low': return '#d4351c' // govuk red
+    case 'med': return '#ffbf47' // govuk amber
     case 'med': return '#ffbf47' // govuk amber
     case 'high': return '#00703c' // govuk green
     default: return '#b1b4b6'
@@ -128,9 +128,10 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
     })
   }
   // Calculate agency counts
-  const agencyCounts = { none: 0, low: 0, med: 0, high: 0 }
+  const agencyCounts = { unset: 0, low: 0, med: 0, high: 0 }
   ;(session.nodes || []).forEach(n => {
-    if (n.agency && agencyCounts[n.agency] !== undefined) agencyCounts[n.agency]++
+    if (!n.agency) agencyCounts.unset++
+    else if (agencyCounts[n.agency] !== undefined) agencyCounts[n.agency]++
   })
   
   res.render('dashboard', {
@@ -458,7 +459,7 @@ router.get('/session/:sessionId/node/:nodeId/agency', (req, res) => {
   if (!session) return res.redirect('/sessions')
   const node = dataHelper.getNode(session, req.params.nodeId)
   if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
-  res.render('assign-agency', { session, node, current: node.agency || 'none' })
+  res.render('assign-agency', { session, node, current: node.agency || 'unset' })
 })
 
 // Set agency (submit)
@@ -467,9 +468,13 @@ router.post('/session/:sessionId/node/:nodeId/agency', (req, res) => {
   if (!session) return res.redirect('/sessions')
   const node = dataHelper.getNode(session, req.params.nodeId)
   if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
-  const allowed = ['none', 'low', 'med', 'high']
+  const allowed = ['unset', 'low', 'med', 'high']
   const { agency } = req.body
-  node.agency = allowed.includes(agency) ? agency : null
+  if (allowed.includes(agency)) {
+    node.agency = (agency === 'unset') ? null : agency
+  } else {
+    node.agency = null
+  }
   res.redirect(`/session/${req.params.sessionId}/dashboard`)
 })
 

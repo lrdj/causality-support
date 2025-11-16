@@ -214,21 +214,73 @@
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
   <h2 class="govuk-heading-m">Agency</h2>
   <div class="cluster-grid">
+    <div class="cluster-tile" style="background-color: #f3f2f1;">
+      <h3 class="govuk-heading-s">Agency not set</h3>
+      <p class="govuk-body-s"><strong>{{ agencyCounts['unset'] }}</strong> nodes</p>
+      {% set noneList %}
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+          {% for node in session.nodes %}
+            {% if not node.agency %}
+              <li>{{ node.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endset %}
+      {{ govukDetails({
+        summaryText: "Show individual problems (" + (agencyCounts['unset'] | default(0)) + ")",
+        html: noneList
+      }) }}
+    </div>
     <div class="cluster-tile" style="background-color: #f3d2d2;">
-      <h3 class="govuk-heading-s">No agency</h3>
-      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['none'] }}</strong> nodes</p>
+      <h3 class="govuk-heading-s">Low agency</h3>
+      <p class="govuk-body-s"><strong>{{ agencyCounts['low'] }}</strong> nodes</p>
+      {% set lowList %}
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+          {% for node in session.nodes %}
+            {% if node.agency == 'low' %}
+              <li>{{ node.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endset %}
+      {{ govukDetails({
+        summaryText: "Show individual problems (" + (agencyCounts['low'] | default(0)) + ")",
+        html: lowList
+      }) }}
     </div>
     <div class="cluster-tile" style="background-color: #fff4e5;">
-      <h3 class="govuk-heading-s">Low agency</h3>
-      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['low'] }}</strong> nodes</p>
-    </div>
-    <div class="cluster-tile" style="background-color: #fff1b8;">
       <h3 class="govuk-heading-s">Some agency</h3>
-      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['med'] }}</strong> nodes</p>
+      <p class="govuk-body-s"><strong>{{ agencyCounts['med'] }}</strong> nodes</p>
+      {% set medList %}
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+          {% for node in session.nodes %}
+            {% if node.agency == 'med' %}
+              <li>{{ node.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endset %}
+      {{ govukDetails({
+        summaryText: "Show individual problems (" + (agencyCounts['med'] | default(0)) + ")",
+        html: medList
+      }) }}
     </div>
     <div class="cluster-tile" style="background-color: #e0f3e8;">
       <h3 class="govuk-heading-s">High agency</h3>
-      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['high'] }}</strong> nodes</p>
+      <p class="govuk-body-s"><strong>{{ agencyCounts['high'] }}</strong> nodes</p>
+      {% set highList %}
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-top-2">
+          {% for node in session.nodes %}
+            {% if node.agency == 'high' %}
+              <li>{{ node.text }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endset %}
+      {{ govukDetails({
+        summaryText: "Show individual problems (" + (agencyCounts['high'] | default(0)) + ")",
+        html: highList
+      }) }}
     </div>
   </div>
 {% endif %}

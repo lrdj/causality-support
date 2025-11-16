@@ -25,7 +25,8 @@
 
     <p class="govuk-body">How much control or influence do you feel you have over this?</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li><strong>No agency</strong>: environmental/beyond my control</li>
+      <li><strong>No agency set</strong>: leave undecided for now</li>
+      <li><strong>Low agency</strong>: environmental/beyond my control</li>
       <li><strong>Some agency</strong>: with the right approach I may help</li>
       <li><strong>High agency</strong>: I can fix this</li>
     </ul>
@@ -37,7 +38,7 @@
         label: { text: 'Choose a rating', classes: 'govuk-label--m' },
         items: (
           [
-            { value: 'none', text: 'No agency', selected: current == 'none' },
+            { value: 'unset', text: 'No agency set', selected: current == 'unset' },
             { value: 'low', text: 'Low agency', selected: current == 'low' },
             { value: 'med', text: 'Some agency', selected: current == 'med' },
             { value: 'high', text: 'High agency', selected: current == 'high' }
