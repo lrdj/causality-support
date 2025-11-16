@@ -35,10 +35,37 @@ function getClusterLabel(session, clusterId) {
   return cluster ? cluster.label : 'Unclustered'
 }
 
+// Agency helpers
+function getAgencyLabel(agency) {
+  const map = { none: 'No agency', low: 'Low agency', med: 'Some agency', high: 'High agency' }
+  return map[agency] || null
+}
+function getAgencyBackground(agency) {
+  switch (agency) {
+    case 'none': return '#f3d2d2' // light red tint
+    case 'low': return '#fff4e5' // light amber tint
+    case 'med': return '#fff1b8' // deeper amber tint
+    case 'high': return '#e0f3e8' // light green tint
+    default: return '#f3f2f1'
+  }
+}
+function getAgencyColour(agency) {
+  switch (agency) {
+    case 'none': return '#d4351c' // govuk red
+    case 'low': return '#ffdd00' // govuk yellow
+    case 'med': return '#ffbf47' // govuk amber
+    case 'high': return '#00703c' // govuk green
+    default: return '#b1b4b6'
+  }
+}
+
 // Add helper functions to res.locals for use in views
 router.use((req, res, next) => {
   res.locals.getClusterColour = getClusterColour
   res.locals.getClusterLabel = getClusterLabel
+  res.locals.getAgencyLabel = getAgencyLabel
+  res.locals.getAgencyBackground = getAgencyBackground
+  res.locals.getAgencyColour = getAgencyColour
   next()
 })
 
@@ -100,6 +127,11 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
       clusterCounts[cluster.id] = dataHelper.getNodesInCluster(session, cluster.id).length
     })
   }
+  // Calculate agency counts
+  const agencyCounts = { none: 0, low: 0, med: 0, high: 0 }
+  ;(session.nodes || []).forEach(n => {
+    if (n.agency && agencyCounts[n.agency] !== undefined) agencyCounts[n.agency]++
+  })
   
   res.render('dashboard', {
     session,
@@ -107,6 +139,7 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
     stats,
     shallowNodes,
     clusterCounts,
+    agencyCounts,
     renamed: req.query.renamed || null
   })
 })
@@ -416,6 +449,27 @@ router.get('/session/:sessionId/node/:nodeId/delete', (req, res) => {
   // Clear any temp analysis to avoid referencing deleted nodes
   delete req.session.data.tempAnalysis
 
+  res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})
+
+// Set agency (form)
+router.get('/session/:sessionId/node/:nodeId/agency', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+  const node = dataHelper.getNode(session, req.params.nodeId)
+  if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
+  res.render('assign-agency', { session, node, current: node.agency || 'none' })
+})
+
+// Set agency (submit)
+router.post('/session/:sessionId/node/:nodeId/agency', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+  const node = dataHelper.getNode(session, req.params.nodeId)
+  if (!node) return res.redirect(`/session/${req.params.sessionId}/dashboard`)
+  const allowed = ['none', 'low', 'med', 'high']
+  const { agency } = req.body
+  node.agency = allowed.includes(agency) ? agency : null
   res.redirect(`/session/${req.params.sessionId}/dashboard`)
 })
 

@@ -1,10 +1,15 @@
 {% macro renderNode(node, session) %}
-<div class="tree-node" style="margin: 10px 0; padding: 10px; border-left: 3px solid {% if node.cluster_id %}{{ getClusterColour(session, node.cluster_id) }}{% else %}#b1b4b6{% endif %}; background-color: #f3f2f1;">
+<div class="tree-node" style="margin: 10px 0; padding: 10px; border-left: 3px solid {% if node.cluster_id %}{{ getClusterColour(session, node.cluster_id) }}{% else %}#b1b4b6{% endif %}; background-color: {{ getAgencyBackground(node.agency) }};">
   <div style="margin-bottom: 5px;">
     <strong class="govuk-tag govuk-tag--grey" style="font-size: 0.75rem;">Level {{ node.level }}</strong>
     {% if node.cluster_id %}
       <strong class="govuk-tag" style="background-color: {{ getClusterColour(session, node.cluster_id) }}; font-size: 0.75rem;">
         {{ getClusterLabel(session, node.cluster_id) }}
+      </strong>
+    {% endif %}
+    {% if node.agency %}
+      <strong class="govuk-tag" style="background-color: {{ getAgencyColour(node.agency) }}; font-size: 0.75rem; color: {% if node.agency == 'high' %}#fff{% else %}#0b0c0c{% endif %};">
+        {{ getAgencyLabel(node.agency) }}
       </strong>
     {% endif %}
   </div>
@@ -24,6 +29,7 @@
     {% if session.clusters and session.clusters.length > 0 %}
     <a href="/session/{{ session.id }}/node/{{ node.id }}/cluster" class="govuk-link govuk-!-font-size-14">Assign cluster</a>
     {% endif %}
+    <a href="/session/{{ session.id }}/node/{{ node.id }}/agency" class="govuk-link govuk-!-font-size-14">Set agency</a>
   </div>
   
   {% if node.children and node.children.length > 0 %}

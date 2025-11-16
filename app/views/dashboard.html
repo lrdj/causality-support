@@ -210,4 +210,27 @@
   </div>
 </div>
 
+{% if agencyCounts %}
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+  <h2 class="govuk-heading-m">Agency</h2>
+  <div class="cluster-grid">
+    <div class="cluster-tile" style="background-color: #f3d2d2;">
+      <h3 class="govuk-heading-s">No agency</h3>
+      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['none'] }}</strong> nodes</p>
+    </div>
+    <div class="cluster-tile" style="background-color: #fff4e5;">
+      <h3 class="govuk-heading-s">Low agency</h3>
+      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['low'] }}</strong> nodes</p>
+    </div>
+    <div class="cluster-tile" style="background-color: #fff1b8;">
+      <h3 class="govuk-heading-s">Some agency</h3>
+      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['med'] }}</strong> nodes</p>
+    </div>
+    <div class="cluster-tile" style="background-color: #e0f3e8;">
+      <h3 class="govuk-heading-s">High agency</h3>
+      <p class="govuk-body-s govuk-!-margin-bottom-0"><strong>{{ agencyCounts['high'] }}</strong> nodes</p>
+    </div>
+  </div>
+{% endif %}
+
 {% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layouts/clarity.html" %}
+
+{% block pageTitle %}
+  Set agency – {{ serviceName }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back to dashboard",
+    href: "/session/" + session.id + "/dashboard"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">Set agency</h1>
+
+    <div class="govuk-inset-text">
+      <strong>Response:</strong><br>
+      {{ node.text }}
+    </div>
+
+    <p class="govuk-body">How much control or influence do you feel you have over this?</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><strong>No agency</strong>: environmental/beyond my control</li>
+      <li><strong>Some agency</strong>: with the right approach I may help</li>
+      <li><strong>High agency</strong>: I can fix this</li>
+    </ul>
+
+    <form action="/session/{{ session.id }}/node/{{ node.id }}/agency" method="post">
+      {{ govukSelect({
+        id: 'agency',
+        name: 'agency',
+        label: { text: 'Choose a rating', classes: 'govuk-label--m' },
+        items: (
+          [
+            { value: 'none', text: 'No agency', selected: current == 'none' },
+            { value: 'low', text: 'Low agency', selected: current == 'low' },
+            { value: 'med', text: 'Some agency', selected: current == 'med' },
+            { value: 'high', text: 'High agency', selected: current == 'high' }
+          ]
+        )
+      }) }}
+
+      {{ govukButton({ text: 'Save' }) }}
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+

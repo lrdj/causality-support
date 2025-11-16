@@ -52,6 +52,7 @@ function createNode(sessionId, text, parentId = null, authorId = 'participant') 
     created_at: new Date().toISOString(),
     tags: [],
     cluster_id: null,
+    agency: null,
     needs_deepening: true,
     children: []
   };
