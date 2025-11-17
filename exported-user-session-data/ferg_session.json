@@ -1,0 +1,569 @@
+{
+  "id": "session_1763304279020_6q2ea0j6x",
+  "title": "Fergus Dowling demo session",
+  "root_node_id": "node_1763304279021_b2i6wrns1",
+  "facilitator_name": "Dug F",
+  "phase": "seeding",
+  "created_at": "2025-11-16T14:44:39.020Z",
+  "nodes": [
+    {
+      "id": "node_1763304279021_b2i6wrns1",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": null,
+      "text": "It's hard (I've always struggled) to know what a role will be before doing it so it's hard to know which one to go for",
+      "level": 0,
+      "author_id": "facilitator",
+      "created_at": "2025-11-16T14:44:39.021Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "med",
+      "needs_deepening": true,
+      "children": [
+        "node_1763304359751_ncipo7gl7",
+        "node_1763304820783_s7ye18tic",
+        "node_1763304870027_x4inbi504",
+        "node_1763305126091_q290o5jr9",
+        "node_1763305797131_yax4w10y8",
+        "node_1763307131104_wynsz4233",
+        "node_1763308420854_oyvz5f43p"
+      ]
+    },
+    {
+      "id": "node_1763304359751_ncipo7gl7",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "I don't know if I should apply for sector specialist",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T14:45:59.751Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": [
+        "node_1763305681435_057vzzhm4"
+      ]
+    },
+    {
+      "id": "node_1763304820783_s7ye18tic",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "My work engagements haven't necessarily flowed one into the next as in  a controlled sequence",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T14:53:40.783Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "low",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763304870027_x4inbi504",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "My 20s feel like here there and everywhere - very disjointed",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T14:54:30.027Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "low",
+      "needs_deepening": true,
+      "children": [
+        "node_1763305030571_9mz4tdljt"
+      ]
+    },
+    {
+      "id": "node_1763305030571_9mz4tdljt",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304870027_x4inbi504",
+      "text": "There was lots of change ",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T14:57:10.571Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "low",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763305126091_q290o5jr9",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "I feel like my craft skills have gone missing. I feel sometimes like I have to make myself want to do it",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T14:58:46.091Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_sebbzkdcv",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": [
+        "node_1763305306158_517efwadp"
+      ]
+    },
+    {
+      "id": "node_1763305306158_517efwadp",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305126091_q290o5jr9",
+      "text": "It is still a part of me (I still enjoy it) -- craft was a big part of my identity but now I don't feel it's still as important",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:01:46.158Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_sebbzkdcv",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": [
+        "node_1763305642171_ia1xqv7tf",
+        "node_1763305642171_b8haeo0wo"
+      ]
+    },
+    {
+      "id": "node_1763305642171_ia1xqv7tf",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305306158_517efwadp",
+      "text": "The roles I'm looking at have a degree of creativity in designing the shape of the projects",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:07:22.171Z",
+      "tags": [],
+      "cluster_id": null,
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763305642171_b8haeo0wo",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305306158_517efwadp",
+      "text": "The roles involve approaching problem solving creatively",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:07:22.171Z",
+      "tags": [],
+      "cluster_id": null,
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763305681435_057vzzhm4",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304359751_ncipo7gl7",
+      "text": "It's hard to know beforehand",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:08:01.435Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "med",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763305797131_yax4w10y8",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "Making sense of career progression is complicated and hard to predict (lead analyst, senior analyst etc)",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:09:57.131Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "low",
+      "needs_deepening": true,
+      "children": [
+        "node_1763305840348_inf9qwt3q",
+        "node_1763306751339_2k97leqd1"
+      ]
+    },
+    {
+      "id": "node_1763305840348_inf9qwt3q",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305797131_yax4w10y8",
+      "text": "It's hard to know if I should stay on the analyst track or pivot to the sector specialist role?",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:10:40.348Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "med",
+      "needs_deepening": true,
+      "children": [
+        "node_1763306029475_wcjw044b8",
+        "node_1763306105598_889m4b78u",
+        "node_1763306167024_niez875ai",
+        "node_1763306835096_sbsgekz6t",
+        "node_1763309741841_d6zv4g15k"
+      ]
+    },
+    {
+      "id": "node_1763306029475_wcjw044b8",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305840348_inf9qwt3q",
+      "text": "I have the skills and experience to do both roles - sector specialist needs more industry-facing elements - you need to know more about the industry",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:13:49.475Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": [
+        "node_1763306322468_yfyiu6wok"
+      ]
+    },
+    {
+      "id": "node_1763306105598_889m4b78u",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305840348_inf9qwt3q",
+      "text": "The analyst role lets you work on very different projects",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:15:05.598Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_rp5cb49s6",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763306167024_niez875ai",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305840348_inf9qwt3q",
+      "text": "The pay package is dramatically different (sector specialist is way more cash)",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:16:07.024Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_nrh5jttf4",
+      "agency": "low",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763306322468_yfyiu6wok",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763306029475_wcjw044b8",
+      "text": "The specialist is more involved in making the change - I would be speaking on Wrap's behalf, expressing Wrap's position on where the industry needs to go",
+      "level": 4,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:18:42.468Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_1yg8zc0u1",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763306751339_2k97leqd1",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305797131_yax4w10y8",
+      "text": "Historically my role in research is unique but they were talking about redundancy",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:25:51.339Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_nrh5jttf4",
+      "agency": null,
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763306835096_sbsgekz6t",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305840348_inf9qwt3q",
+      "text": "I want to make sure I am still doing something to solve the problem (ecology issues)",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:27:15.096Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_1yg8zc0u1",
+      "agency": "med",
+      "needs_deepening": true,
+      "children": [
+        "node_1763306900406_xzbtkd1sw"
+      ]
+    },
+    {
+      "id": "node_1763306900406_xzbtkd1sw",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763306835096_sbsgekz6t",
+      "text": "I want to feel job satisfaction even when I am hating my job",
+      "level": 4,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:28:20.406Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_mluj89h4q",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763307131104_wynsz4233",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "Working from home I don't want to keep working after 5pm - I'm done, wouldn't keep going.",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:32:11.104Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_mluj89h4q",
+      "agency": "med",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763308420854_oyvz5f43p",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763304279021_b2i6wrns1",
+      "text": "I've always assumed my 'disjointed' career was a bad thing, showing I lacked focus or drive for a particular thing and this planning and deciding even more difficult",
+      "level": 1,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:53:40.854Z",
+      "tags": [],
+      "cluster_id": "cluster_1763308776088_mluj89h4q",
+      "agency": "high",
+      "needs_deepening": true,
+      "children": [
+        "node_1763308507228_dt6neum8r"
+      ]
+    },
+    {
+      "id": "node_1763308507228_dt6neum8r",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763308420854_oyvz5f43p",
+      "text": "Is that assumption a known or an unknown, (have you checked) for example, my experience of skiing , working in hospitality",
+      "level": 2,
+      "author_id": "participant",
+      "created_at": "2025-11-16T15:55:07.228Z",
+      "tags": [],
+      "cluster_id": null,
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    },
+    {
+      "id": "node_1763309741841_d6zv4g15k",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "parent_id": "node_1763305840348_inf9qwt3q",
+      "text": "It's hard to know how important money in my decision-making",
+      "level": 3,
+      "author_id": "participant",
+      "created_at": "2025-11-16T16:15:41.841Z",
+      "tags": [],
+      "cluster_id": null,
+      "agency": "high",
+      "needs_deepening": true,
+      "children": []
+    }
+  ],
+  "clusters": [
+    {
+      "id": "cluster_1763308776088_sebbzkdcv",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "label": "Identity",
+      "colour": "#A8E6CF",
+      "description": "Feelings about personal skills, career identity, and self-perception related to work roles.",
+      "created_at": "2025-11-16T15:59:36.088Z"
+    },
+    {
+      "id": "cluster_1763308776088_rp5cb49s6",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "label": "Growth",
+      "colour": "#FDA085",
+      "description": "Challenges and uncertainties about career progression, role choices, and skill development.",
+      "created_at": "2025-11-16T15:59:36.088Z"
+    },
+    {
+      "id": "cluster_1763308776088_1yg8zc0u1",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "label": "Security",
+      "colour": "#F6D365",
+      "description": "Concerns about job stability, pay differences, and the impact of redundancy.",
+      "created_at": "2025-11-16T15:59:36.088Z"
+    },
+    {
+      "id": "cluster_1763308776088_nrh5jttf4",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "label": "Relationships",
+      "colour": "#FFFFBA",
+      "description": "Roles involving external communication, industry engagement, and representing organizational positions.",
+      "created_at": "2025-11-16T15:59:36.088Z"
+    },
+    {
+      "id": "cluster_1763308776088_mluj89h4q",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "label": "Health/Wellbeing",
+      "colour": "#BAE1FF",
+      "description": "Feelings about work-life balance, job satisfaction, and emotional responses to work.",
+      "created_at": "2025-11-16T15:59:36.088Z"
+    }
+  ],
+  "prompt_logs": [
+    {
+      "id": "pl_1763304286220_svmsxbb4a",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304279021_b2i6wrns1",
+      "prompt_text": "What specific challenges do you face when trying to understand a role before starting it?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:44:46.220Z"
+    },
+    {
+      "id": "pl_1763304735300_apy4bq8ak",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304279021_b2i6wrns1",
+      "prompt_text": "Can you describe a specific role you were unsure about before starting?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:52:15.300Z"
+    },
+    {
+      "id": "pl_1763304924056_md2b06560",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304870027_x4inbi504",
+      "prompt_text": "What specific experiences make your 20s feel disjointed?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:55:24.056Z"
+    },
+    {
+      "id": "pl_1763305060404_lvhe1gw4c",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305030571_9mz4tdljt",
+      "prompt_text": "What specific changes are you referring to?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:57:40.404Z"
+    },
+    {
+      "id": "pl_1763305093470_pq6np5wom",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304279021_b2i6wrns1",
+      "prompt_text": "What specific aspects of a role are hardest for you to understand before starting?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:58:13.470Z"
+    },
+    {
+      "id": "pl_1763305132169_4olc71174",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305126091_q290o5jr9",
+      "prompt_text": "What specific craft skills do you feel you've lost recently?",
+      "response_text": null,
+      "timestamp": "2025-11-16T14:58:52.169Z"
+    },
+    {
+      "id": "pl_1763305541322_4vvictc3z",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305306158_517efwadp",
+      "prompt_text": "Can you describe a specific moment when craft felt less important to you?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:05:41.322Z"
+    },
+    {
+      "id": "pl_1763305659678_lao9czx92",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304359751_ncipo7gl7",
+      "prompt_text": "What specific concerns do you have about applying for the sector specialist role?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:07:39.678Z"
+    },
+    {
+      "id": "pl_1763305762267_1q6tz39jm",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304279021_b2i6wrns1",
+      "prompt_text": "What specific challenges make it difficult to understand a role before starting it?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:09:22.267Z"
+    },
+    {
+      "id": "pl_1763305806477_on7y45o3z",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305797131_yax4w10y8",
+      "prompt_text": "What specific factors make predicting career progression complicated in your field?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:10:06.477Z"
+    },
+    {
+      "id": "pl_1763305979218_qysqwi93u",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305840348_inf9qwt3q",
+      "prompt_text": "What specific skills or interests make you consider each career path?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:12:59.218Z"
+    },
+    {
+      "id": "pl_1763306086950_yqway4pzf",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305840348_inf9qwt3q",
+      "prompt_text": "What specific skills or interests draw you to each role?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:14:46.950Z"
+    },
+    {
+      "id": "pl_1763306134184_2e509uo4e",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305840348_inf9qwt3q",
+      "prompt_text": "What specific skills or interests make you consider switching to a sector specialist role?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:15:34.184Z"
+    },
+    {
+      "id": "pl_1763306253483_8r7zm3csn",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763306029475_wcjw044b8",
+      "prompt_text": "Can you give an example of an industry-facing element a sector specialist should know?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:17:33.483Z"
+    },
+    {
+      "id": "pl_1763306798062_fqx0zxgm6",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763305840348_inf9qwt3q",
+      "prompt_text": "What specific challenges make deciding between analyst and sector specialist roles difficult?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:26:38.062Z"
+    },
+    {
+      "id": "pl_1763306852396_2dft5ycp4",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763306835096_sbsgekz6t",
+      "prompt_text": "What specific actions are you currently taking to address ecological issues?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:27:32.396Z"
+    },
+    {
+      "id": "pl_1763306968817_z5eealrya",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763306900406_xzbtkd1sw",
+      "prompt_text": "What specific aspects of your job make you feel dissatisfied?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:29:28.817Z"
+    },
+    {
+      "id": "pl_1763307190048_1ynbwbpbw",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763307131104_wynsz4233",
+      "prompt_text": "What specific tasks make you feel like you should stop working after 5pm?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:33:10.048Z"
+    },
+    {
+      "id": "pl_1763308356293_atmt9nd3r",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763304279021_b2i6wrns1",
+      "prompt_text": "What specific challenges make it hard to understand a role before starting it?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:52:36.293Z"
+    },
+    {
+      "id": "pl_1763308428003_yory82n84",
+      "session_id": "session_1763304279020_6q2ea0j6x",
+      "node_id": "node_1763308420854_oyvz5f43p",
+      "prompt_text": "Can you give an example of how your career felt disjointed or unfocused?",
+      "response_text": null,
+      "timestamp": "2025-11-16T15:53:48.003Z"
+    }
+  ],
+  "reflection": "The workshop highlighted themes around identity, growth, and the evolving nature of work, with participants expressing uncertainty about career paths and a sense of disjointed progression. A tension emerged between the desire to maintain creative craftsmanship as a core identity and the reality of shifting interests and roles that require adaptable problem-solving skills. Moving forward, focusing on strategies to integrate personal identity with professional growth, while embracing flexibility in career development, could provide valuable clarity and direction. Encouraging participants to explore how their evolving skills and passions align with new opportunities may help reconcile these tensions."
+}
