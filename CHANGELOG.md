@@ -28,3 +28,18 @@ All notable changes to this project will be documented in this file.
   - Participant view is functional for single-prompt flows but considered experimental (no realtime updates yet).
   - Session data remains in-memory (no DB); restarting the server clears data.
 
+## 2025-11-22
+
+- Agency (control) ratings
+  - Added “Set agency” link on each node → select list with: No agency set, Low, Some, High.
+  - Node backgrounds tint by agency (R/A/G; unset is grey) and show a small agency tag for Low/Some/High.
+  - New Agency section on the dashboard with four tiles (unset/low/med/high) and details lists of node texts per category.
+  - Export/Import JSON includes node `agency` values; unset stored as null.
+- Reflection readability
+  - Reflection text split into sentence bullets for easier scanning.
+  - Theme lists now use Details pattern to expand individual node statements.
+- Sessions utilities
+  - Export JSON link per session; Import page (paste JSON); Load sample session (bundled tree).
+  - Rename flow moved to its own page from the sessions table.
+- Header & polish
+  - Clarity Lab service nav added (unbranded kit layout); date formatting filter (`yy-MM-dd HH:mm`).
