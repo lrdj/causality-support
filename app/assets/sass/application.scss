@@ -9,23 +9,39 @@
 // Custom styles for Causality Garden
 
 // Tree node styling
+//
+// Hover/ancestor emphasis behaviour (feature-flagged):
+// - Enabled by adding the modifier class `.causality-tree--emphasis` on the
+//   tree container.
+// - Hovering a node bolds ONLY the hovered node's main text and adds a left
+//   border cue to the hovered node's level tag AND all ancestor nodes' level
+//   tags (path to root).
+// - We rely on :has() to avoid bolding ancestors while still highlighting
+//   their level indicators.
 .causality-tree {
   .tree-node {
     // Remove previous hover background/translate for calmer UI
   }
+  // Level indicator baseline styling (always present)
+  .level-indicator {
+    border-left: 3px solid transparent;
+    padding-left: 6px;
+  }
+}
+
+// Emphasis effect only when the modifier class is present
+.causality-tree.causality-tree--emphasis {
   // Provide a gentle transition when emphasizing text on hover
   .tree-node > p.govuk-body {
     transition: font-weight 0.25s ease-in-out;
   }
+  // Level indicator transition when emphasizing ancestors
+  .level-indicator {
+    transition: border-left-color 0.25s ease-in-out;
+  }
   // Bold only the innermost hovered node's main text (not ancestors)
   .tree-node:hover:not(:has(.tree-node:hover)) > p.govuk-body {
     font-weight: 700;
-  }
-  // Level indicator baseline styling
-  .level-indicator {
-    border-left: 3px solid transparent;
-    padding-left: 6px;
-    transition: border-left-color 0.25s ease-in-out;
   }
   // Emphasise hovered node's level indicator
   .tree-node:hover > div:first-child .level-indicator {
