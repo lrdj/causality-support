@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    text: "Back to dashboard",
+    text: "Back to workspace",
     href: "/session/" + session.id + "/dashboard"
   }) }}
 {% endblock %}
@@ -106,7 +106,7 @@
 
       <div class="govuk-button-group">
         <a href="/session/{{ session.id }}/dashboard" class="govuk-button">
-          Back to dashboard
+          Back to workspace
         </a>
         <button class="govuk-button govuk-button--secondary" onclick="window.print()">
           Print reflection

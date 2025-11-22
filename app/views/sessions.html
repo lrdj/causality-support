@@ -43,7 +43,7 @@
           {% for session in data.sessions %}
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">
-              <a href="/session/{{ session.id }}/dashboard" class="govuk-link">{{ session.title }}</a>
+              <a href="/session/{{ session.id }}/workspace" class="govuk-link">{{ session.title }}</a>
             </th>
             <td class="govuk-table__cell">
               <strong class="govuk-tag">{{ session.phase | capitalize }}</strong>

@@ -108,8 +108,8 @@ router.post('/session/create', (req, res) => {
 // DASHBOARD ROUTES
 // ============================================================================
 
-// Session dashboard
-router.get('/session/:sessionId/dashboard', (req, res) => {
+// Workspace (main facilitator page)
+router.get('/session/:sessionId/workspace', (req, res) => {
   const session = findSession(req.session.data.sessions, req.params.sessionId)
   
   if (!session) {
@@ -134,7 +134,7 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
     else if (agencyCounts[n.agency] !== undefined) agencyCounts[n.agency]++
   })
   
-  res.render('dashboard', {
+  res.render('workspace', {
     session,
     tree,
     stats,
@@ -143,6 +143,11 @@ router.get('/session/:sessionId/dashboard', (req, res) => {
     agencyCounts,
     renamed: req.query.renamed || null
   })
+})
+
+// Backwards-compatible path
+router.get('/session/:sessionId/dashboard', (req, res) => {
+  res.redirect(`/session/${req.params.sessionId}/workspace`)
 })
 
 // Update session phase
