@@ -11,12 +11,29 @@
 // Tree node styling
 .causality-tree {
   .tree-node {
-    transition: all 0.2s ease;
-    
-    &:hover {
-      background-color: #e8e8e8 !important;
-      transform: translateX(2px);
-    }
+    // Remove previous hover background/translate for calmer UI
+  }
+  // Provide a gentle transition when emphasizing text on hover
+  .tree-node > p.govuk-body {
+    transition: font-weight 0.25s ease-in-out;
+  }
+  // Bold only the innermost hovered node's main text (not ancestors)
+  .tree-node:hover:not(:has(.tree-node:hover)) > p.govuk-body {
+    font-weight: 700;
+  }
+  // Level indicator baseline styling
+  .level-indicator {
+    border-left: 3px solid transparent;
+    padding-left: 6px;
+    transition: border-left-color 0.25s ease-in-out;
+  }
+  // Emphasise hovered node's level indicator
+  .tree-node:hover > div:first-child .level-indicator {
+    border-left-color: #666;
+  }
+  // Emphasise all ancestor nodes' level indicators when a descendant is hovered
+  .tree-node:has(.tree-node:hover) > div:first-child .level-indicator {
+    border-left-color: #666;
   }
 }
 

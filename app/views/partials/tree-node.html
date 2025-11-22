@@ -1,7 +1,7 @@
 {% macro renderNode(node, session) %}
 <div class="tree-node" style="margin: 10px 0; padding: 10px; border-left: 3px solid {% if node.cluster_id %}{{ getClusterColour(session, node.cluster_id) }}{% else %}#b1b4b6{% endif %}; background-color: {{ getAgencyBackground(node.agency) }};">
   <div style="margin-bottom: 5px;">
-    <strong class="govuk-tag govuk-tag--grey" style="font-size: 0.75rem;">Level {{ node.level }}</strong>
+    <strong class="govuk-tag govuk-tag--grey level-indicator" style="font-size: 0.75rem;">Level {{ node.level }}</strong>
     {% if node.cluster_id %}
       <strong class="govuk-tag" style="background-color: {{ getClusterColour(session, node.cluster_id) }}; font-size: 0.75rem;">
         {{ getClusterLabel(session, node.cluster_id) }}
