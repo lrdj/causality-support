@@ -22,6 +22,16 @@
   .tree-node {
     // Remove previous hover background/translate for calmer UI
   }
+  // Hide edit link by default; reveal on hover or focus for accessibility
+  .node-edit-link {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    margin-left: 6px;
+  }
+  .tree-node:hover:not(:has(.tree-node:hover)) > p.govuk-body > .node-edit-link,
+  .node-edit-link:focus {
+    opacity: 1;
+  }
   // Level indicator baseline styling (always present)
   .level-indicator {
     border-left: 3px solid transparent;

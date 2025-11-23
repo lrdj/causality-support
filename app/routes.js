@@ -141,7 +141,8 @@ router.get('/session/:sessionId/workspace', (req, res) => {
     shallowNodes,
     clusterCounts,
     agencyCounts,
-    renamed: req.query.renamed || null
+    renamed: req.query.renamed || null,
+    editNodeId: req.query.editNode || null
   })
 })
 
@@ -481,6 +482,20 @@ router.post('/session/:sessionId/node/:nodeId/agency', (req, res) => {
     node.agency = null
   }
   res.redirect(`/session/${req.params.sessionId}/dashboard`)
+})
+
+// Update node text
+router.post('/session/:sessionId/node/:nodeId/update-text', (req, res) => {
+  const session = findSession(req.session.data.sessions, req.params.sessionId)
+  if (!session) return res.redirect('/sessions')
+  const node = dataHelper.getNode(session, req.params.nodeId)
+  if (!node) return res.redirect(`/session/${req.params.sessionId}/workspace`)
+
+  const text = (req.body.text || '').trim()
+  if (text.length > 0) {
+    node.text = text
+  }
+  res.redirect(`/session/${req.params.sessionId}/workspace#node-${node.id}`)
 })
 
 // ============================================================================

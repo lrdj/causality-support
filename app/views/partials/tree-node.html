@@ -1,5 +1,5 @@
 {% macro renderNode(node, session) %}
-<div class="tree-node" style="margin: 10px 0; padding: 10px; border-left: 3px solid {% if node.cluster_id %}{{ getClusterColour(session, node.cluster_id) }}{% else %}#b1b4b6{% endif %}; background-color: {{ getAgencyBackground(node.agency) }};">
+<div class="tree-node" id="node-{{ node.id }}" style="margin: 10px 0; padding: 10px; border-left: 3px solid {% if node.cluster_id %}{{ getClusterColour(session, node.cluster_id) }}{% else %}#b1b4b6{% endif %}; background-color: {{ getAgencyBackground(node.agency) }};">
   <div style="margin-bottom: 5px;">
     <strong class="govuk-tag govuk-tag--grey level-indicator" style="font-size: 0.75rem;">Level {{ node.level }}</strong>
     {% if node.cluster_id %}
@@ -14,7 +14,23 @@
     {% endif %}
   </div>
   
-  <p class="govuk-body" style="margin-bottom: 10px;">{{ node.text }}</p>
+  {% if editNodeId and editNodeId == node.id %}
+    <form action="/session/{{ session.id }}/node/{{ node.id }}/update-text" method="post" class="govuk-!-margin-bottom-2">
+      {{ govukInput({
+        id: 'text-' + node.id,
+        name: 'text',
+        label: { text: 'Edit response', classes: 'govuk-label--s' },
+        classes: 'govuk-!-width-full',
+        value: node.text
+      }) }}
+      <div class="govuk-button-group">
+        {{ govukButton({ text: 'Save' }) }}
+        <a href="/session/{{ session.id }}/workspace#node-{{ node.id }}" class="govuk-link">Cancel</a>
+      </div>
+    </form>
+  {% else %}
+    <p class="govuk-body" style="margin-bottom: 10px;">{{ node.text }} <a href="/session/{{ session.id }}/workspace?editNode={{ node.id }}#node-{{ node.id }}" class="govuk-link govuk-!-font-size-14 node-edit-link">edit</a></p>
+  {% endif %}
   
   <div class="govuk-button-group">
     {# "Why else" adds a sibling by adding a child to this node's parent #}
